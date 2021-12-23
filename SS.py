@@ -8,8 +8,26 @@ host = socket.gethostname()
 port = 10000
 ThreadCount = 0
 r_array =  ["Ford", "Volvo", "BMW"]
+
+class university:
+    def __init__(self):
+
+        self.country = "Iran"
+        self.city = "Tehran"
+        self.address = "No. 350, Hafez Ave, Valiasr Square"
+        self.name = "Amirkabir University of Technology"
+        self.contact_array =  {"tel" : "+98(21)66419506" , "fax" : "+98(21)66495519" , "email" : "pheeaut.ac.ir"}
+
+    def contact_Info(self):
+        return self.contact_array
+    def phone(self):
+        print(self.address)
+        return self.country
+
 # _____________________________________________________________
 
+AUT = university()
+AUT.phone()
 
 
 # When an error occurs, or exception as we call it,
@@ -35,10 +53,17 @@ def client_thread(connection):
     print("??2??")
     connection.send(str.encode("Welcome to the server"))
     while True:
-        print("Array value is: ", r_array[0])
+        # print("Array value is: ", r_array[0])
         data = connection.recv(2048)
+        print("recievd method:  ", data.decode("UTF-8"))
+        data = data.decode("UTF-8")
+        temp = ""
+        temp = exec(data)
+        print("temp value is: ", temp)
+
+
         r_array[0] = data;
-        reply = "Hello I'm the server" + data.decode("utf-8")
+        # reply = "Hello I'm the server" + data.decode("utf-8")
         if not data:
             break
         #   [socket.send] ->  is a low-level method and basically just the C/syscall method send(3) / send(2).
@@ -46,7 +71,7 @@ def client_thread(connection):
 
         # **** [socket.sendall]   -> is a high-level Python-only method that sends the entire buffer you pass or throws an exception.
         #                        It does that by calling socket.send until everything has been sent or an error occurs.
-        connection.sendall(str.encode(reply))
+        connection.sendall(str.encode(temp))
     connection.close()
 print("??3??")
 

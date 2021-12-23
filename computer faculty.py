@@ -6,16 +6,22 @@ class university:
         self.city = "Tehran"
         self.address = "No. 350, Hafez Ave, Valiasr Square"
         self.name = "Amirkabir University of Technology"
-        self.contact_array =  {"tel" : "+98(21)66419506" , "fax" : "+98(21)66495519" , "email" : "pheeaut.ac.ir"}
+        self.contact_array =  {"tel" : "+98(21)66419506" , "fax" : "+98(21)66495519" , "email" : "phee@aut.ac.ir"}
 
     def contact_Info(self):
         return self.contact_array
 
 
-
-# class  faculty(university):
+#
+# class  Library(university):
 #
 #     def __init__(self):
+
+
+
+
+
+
 
     mycode = 'print ("hello world")'
     exec(mycode)
