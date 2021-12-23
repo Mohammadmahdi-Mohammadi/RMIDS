@@ -59,6 +59,7 @@ except:
     print("Sth Went wrong during binding! ")
 
 # _____________________________________________________________
+security_array = [("ali","1985"),("amir","1998"),("hamid","2000")]
 
 print("Waiting for connection an client .... ")
 serversocket.listen(5)
@@ -71,28 +72,41 @@ print("??1??")
 def client_thread(connection):
     print("??2??")
     connection.send(str.encode("Welcome to the server"))
-    while True:
-        # print("Array value is: ", r_array[0])
-        data = connection.recv(2048)
-        print("recievd method:  ", data.decode("UTF-8"))
-        data = data.decode("UTF-8")
+    check = connection.recv(2048)
+    check = check.decode("UTF-8")
+    check_array = check.split()
+    if (check_array[0],check_array[1]) in security_array:
+        print("authentication was successful :)")
+        connection.sendall(str.encode("yes"))
+        while True:
+            # print("Array value is: ", r_array[0])
+            data = connection.recv(2048)
+            print("recievd method:  ", data.decode("UTF-8"))
+            data = data.decode("UTF-8")
 
-        with stdoutIO() as s:
-            exec(data)
+            with stdoutIO() as s:
+                exec(data)
 
-        print("out:", s.getvalue())
+            print("out:", s.getvalue())
 
-        r_array[0] = data;
-        # reply = "Hello I'm the server" + data.decode("utf-8")
-        if not data:
-            break
-        #   [socket.send] ->  is a low-level method and basically just the C/syscall method send(3) / send(2).
-        #                     It can send less bytes than you requested, but returns the number of bytes sent.
+            r_array[0] = data;
+            # reply = "Hello I'm the server" + data.decode("utf-8")
+            if not data:
+                break
+            #   [socket.send] ->  is a low-level method and basically just the C/syscall method send(3) / send(2).
+            #                     It can send less bytes than you requested, but returns the number of bytes sent.
 
-        # **** [socket.sendall]   -> is a high-level Python-only method that sends the entire buffer you pass or throws an exception.
-        #                        It does that by calling socket.send until everything has been sent or an error occurs.
-        connection.sendall(str.encode(s.getvalue()))
-    connection.close()
+            # **** [socket.sendall]   -> is a high-level Python-only method that sends the entire buffer you pass or throws an exception.
+            #                        It does that by calling socket.send until everything has been sent or an error occurs.
+            connection.sendall(str.encode(s.getvalue()))
+        connection.close()
+    else:
+        print("authentication was unsuccessful :(")
+        connection.close()
+
+
+
+
 print("??3??")
 
 while True:
