@@ -1,23 +1,35 @@
 from tkinter import *
+from functools import partial
+
+def validateLogin(username, password):
+	print("username entered :", username.get())
+	print("password entered :", password.get())
+	tkWindow.destroy()
+	print("verify your account")
+	return username.get(),password.get()
 
 
-def main_account_screen():
-    main_screen = Tk()  # create a GUI window
-    main_screen.geometry("300x250")  # set the configuration of GUI window
-    main_screen.title("Account Login")  # set the title of GUI window
+#window
+tkWindow = Tk()
+tkWindow.geometry('200x100')
+tkWindow.title('Login')
+
+#username label and text entry box
+usernameLabel = Label(tkWindow, text="User Name").grid(row=1, column=0)
+username = StringVar()
+usernameEntry = Entry(tkWindow, textvariable=username).grid(row=1, column=1)
+
+#password label and password entry box
+passwordLabel = Label(tkWindow,text="Password").grid(row=2, column=0)
+password = StringVar()
+passwordEntry = Entry(tkWindow, textvariable=password, show='*').grid(row=2, column=1)
+
+validateLogin = partial(validateLogin, username, password)
+
+#login button
+loginButton = Button(tkWindow, text="Login", command=validateLogin).grid(row=3, column=1)
 
 
-# create a Form label
-Label(text="Choose Login Or Register", bg="blue", width="300", height="2", font=("Calibri", 13)).pack()
-Label(text="").pack()
 
-# create Login Button
-Button(text="Login", height="2", width="30").pack()
-Label(text="").pack()
-
-# create a register button
-Button(text="Register", height="2", width="30").pack()
-
-main_screen.mainloop()  # start the GUI
-
-main_account_screen()  # call the main_account_screen() function
+tkWindow.mainloop()
+print("salaaaaaaaaaaaaaaaaaaam")
