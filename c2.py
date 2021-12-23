@@ -9,8 +9,10 @@ port = 10000
 print("waiting for connections")
 try:
     clientsocket.connect((host,port))
-except socket.error as e:
-    print(str(e))
+except:
+    print("Sth Went wrong during binding! ")
+# except socket.error as e:
+#     print(str(e))
 
 Response = clientsocket.recv(1024)
 print(Response.decode("utf-8"))

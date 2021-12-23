@@ -23,13 +23,13 @@ data = "AUT.phone()"
 print(AUT.city)
 
 # -----------------------------------------------------------------------------------
-
+# https://stackoverflow.com/questions/3906232/python-get-the-print-output-in-an-exec-statement
+# Since Python 3.4 there is a solution is the stdlib:
 
 import sys
 from io import StringIO
 import contextlib
-# https://stackoverflow.com/questions/3906232/python-get-the-print-output-in-an-exec-statement
-# Since Python 3.4 there is a solution is the stdlib:
+
 @contextlib.contextmanager
 def stdoutIO(stdout=None):
     old = sys.stdout

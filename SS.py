@@ -1,3 +1,22 @@
+# --------------------------------------------------------------
+
+# https://stackoverflow.com/questions/3906232/python-get-the-print-output-in-an-exec-statement
+# Since Python 3.4 there is a solution is the stdlib:
+
+import sys
+from io import StringIO
+import contextlib
+
+@contextlib.contextmanager
+def stdoutIO(stdout=None):
+    old = sys.stdout
+    if stdout is None:
+        stdout = StringIO()
+    sys.stdout = stdout
+    yield stdout
+    sys.stdout = old
+# --------------------------------------------------------------
+
 import socket
 from _thread import *
 serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -57,10 +76,11 @@ def client_thread(connection):
         data = connection.recv(2048)
         print("recievd method:  ", data.decode("UTF-8"))
         data = data.decode("UTF-8")
-        temp = ""
-        temp = exec(data)
-        print("temp value is: ", temp)
 
+        with stdoutIO() as s:
+            exec(data)
+
+        print("out:", s.getvalue())
 
         r_array[0] = data;
         # reply = "Hello I'm the server" + data.decode("utf-8")
@@ -71,7 +91,7 @@ def client_thread(connection):
 
         # **** [socket.sendall]   -> is a high-level Python-only method that sends the entire buffer you pass or throws an exception.
         #                        It does that by calling socket.send until everything has been sent or an error occurs.
-        connection.sendall(str.encode(temp))
+        connection.sendall(str.encode(s.getvalue()))
     connection.close()
 print("??3??")
 
