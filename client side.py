@@ -57,10 +57,20 @@ class Library:
 			print(book)
 
 	def addBook(self, student_array):
-		for book in student_array:
-			print(book)
-		# self.availablebooks.append((returnedBook,author))
-		print("Thanks for returning your borrowed book")
+		if len(student_array) > 1:
+			print("List of books you have borrowed: ")
+			index = 1
+			for book in student_array:
+				print(index,"- ",book)
+				index += 1
+			print("Enter the desired book number in range of 1 to ",index," : ")
+			booknum = input()
+			while (booknum > index or booknum < 1):
+				print("Enter the desired book number in range of 1 to ", index, " : ")
+				booknum = input()
+			add_index = booknum - 1
+			self.availablebooks.append((student_array[add_index]))
+			print("Thanks for returning your borrowed book")
 
 	def lendBook(self, requestedBook, requestedBook_author, student_array):
 		if (requestedBook,requestedBook_author) in self.availablebooks:
@@ -73,7 +83,7 @@ class Library:
 
 
 class Student:
-	Borrowed_list = [("None", "None")]
+	Borrowed_list = []
 
 	def get_array(self):
 		return self.Borrowed_list
