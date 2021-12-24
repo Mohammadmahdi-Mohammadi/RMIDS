@@ -15,6 +15,11 @@ def stdoutIO(stdout=None):
     sys.stdout = stdout
     yield stdout
     sys.stdout = old
+    #
+    # with stdoutIO() as s:
+    #     exec(data)
+    #
+    # print("out:", s.getvalue())
 # --------------------------------------------------------------
 
 import socket
@@ -52,9 +57,12 @@ class Library:
 
     def displayAvailablebooks(self):
         print("The books we have in our library are as follows:")
-        print("================================")
+        print("====================================================== ")
+        send_data = "The books we have in our library are as follows:@======================================================  "
         for book in self.availablebooks:
             print(book)
+            send_data = send_data +"@ " + book[0] + " | " + book[1]
+        return send_data
 
     def addBook(self, student):
         # print("hhhhhhhhhhhhh")
@@ -130,6 +138,7 @@ library = Library([("The Soul of a New Machine", "Tracy Kidder"),
                        ("Computer Architecture: A Quantitative Approach", "John Hennessy")])
 
 
+
 # When an error occurs, or exception as we call it,
 # Python will normally stop and generate an error message.
 try:
@@ -144,34 +153,6 @@ except:
 security_array = [("ali","1985"),("amir","1998"),("hamid","2000")]
 
 # _____________________________________________________________
-
-
-student = Student()
-done = False
-while done == False:
-        print(""" ======LIBRARY MENU=======
-                          1. Display all available books
-                          2. Request a book
-                          3. Return a book
-                          4. Exit
-                          """)
-        choice = int(input("Enter Choice: "))
-        if choice == 1:
-            library.displayAvailablebooks()
-        elif choice == 2:
-            arg1, arg2 = student.requestBook()
-            print("cout: ", arg1, arg2)
-            array = student.get_array()
-            library.lendBook(arg1, arg2, array)
-        elif choice == 3:
-            # arg3, arg4 = student.addBook()
-            array = student.get_array()
-            library.addBook(student)
-        elif choice == 4:
-            sys.exit()
-
-
-
 
 
 print("Waiting for connection an client .... ")
@@ -190,28 +171,39 @@ def client_thread(connection):
     check_array = check.split()
     if (check_array[0],check_array[1]) in security_array:
         print("authentication was successful :)")
+        student = Student()
         connection.sendall(str.encode("yes"))
         while True:
             # print("Array value is: ", r_array[0])
             data = connection.recv(2048)
             print("recievd method:  ", data.decode("UTF-8"))
             data = data.decode("UTF-8")
+            choice = int(data)
 
-            with stdoutIO() as s:
-                exec(data)
+            if choice == 1:
+                data = library.displayAvailablebooks()
+            elif choice == 2:
+                arg1, arg2 = student.requestBook()
+                print("cout: ", arg1, arg2)
+                array = student.get_array()
+                library.lendBook(arg1, arg2, array)
+            elif choice == 3:
+                # arg3, arg4 = student.addBook()
+                array = student.get_array()
+                library.addBook(student)
+            elif choice == 4:
+                connection.close()
+            # with stdoutIO() as s:
+            #     exec(data)
+            #
+            # print("out:", s.getvalue())
 
-            print("out:", s.getvalue())
-
-            # r_array[0] = data;
-            # reply = "Hello I'm the server" + data.decode("utf-8")
             if not data:
                 break
-            #   [socket.send] ->  is a low-level method and basically just the C/syscall method send(3) / send(2).
-            #                     It can send less bytes than you requested, but returns the number of bytes sent.
 
-            # **** [socket.sendall]   -> is a high-level Python-only method that sends the entire buffer you pass or throws an exception.
-            #                        It does that by calling socket.send until everything has been sent or an error occurs.
-            connection.sendall(str.encode(s.getvalue()))
+            # connection.sendall(str.encode(s.getvalue()))
+            connection.sendall(str.encode(data))
+
         connection.close()
     else:
         print("authentication was unsuccessful :(")

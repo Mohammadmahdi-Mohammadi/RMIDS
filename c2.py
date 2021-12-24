@@ -70,12 +70,34 @@ response = clientsocket.recv(1024)
 response = response.decode("utf-8")
 if response == "yes":
     print("authentication was successful :)")
+    print(""" ======LIBRARY MENU=======
+                      1. Display all available books
+                      2. Request a book
+                      3. Return a book
+                      4. Exit
+                      """)
 
     while True:
-        Input = input("say something")
+        Input = input("Enter Choice:")
         clientsocket.send(str.encode(Input))
         response = clientsocket.recv(1024)
-        print((response.decode("utf-8")))
+        response = response.decode("UTF-8")
+        if int(Input) == 1:
+            responses = response.split('@')
+            i = 1
+            for item in responses:
+                if i > 2:
+                    print("     ",i - 2,"- ",item)
+                else:
+                    print("     ",item)
+                i += 1
+        # if Input == 2:
+        # if Input == 3:
+        # if Input == 4:
+
+        clientsocket.send(str.encode(Input))
+        response = clientsocket.recv(1024)
+
 else:
     print("authentication was unsuccessful :(")
 
