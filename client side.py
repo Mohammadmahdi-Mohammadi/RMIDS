@@ -14,22 +14,31 @@ class Library:
 			print(book)
 
 	def addBook(self, student):
+		# print("hhhhhhhhhhhhh")
 		student_array = student.get_array()
-		if len(student_array) > 1:
-			print("List of books you have borrowed: ")
+		# print("hhhhhhhhhhhhhggggggg")
+		if len(student_array) > 0:
+			# print("hhhhhhh23452hhhhhhggggggg")
+			# print("List of books you have borrowed: ")
 			index = 1
 			for book in student_array:
 				print(index,"- ",book)
 				index += 1
 			print("Enter the desired book number in range of 1 to ",index - 1," : ")
 			booknum = input()
-			while (int(booknum) > index or int(booknum) < 1):
+			while (int(booknum) > index - 1 or int(booknum) < 0):
 				print("Enter the desired book number in range of 1 to ", index - 1, " : ")
 				booknum = input()
 			add_index = int(booknum) - 1
 			self.availablebooks.append((student_array[add_index]))
 			student.del_b_book(int(booknum) - 1)
 			print("Thanks for returning your borrowed book")
+		else:
+			print(" \n \n----------------------------------------------------------------------- \n "
+				  "You have not borrowed any books from the library \n"
+				  " and therefore it is not possible to provide services to you in this section :\  \n"
+				  "-----------------------------------------------------------------------")
+
 
 	def lendBook(self, requestedBook, requestedBook_author, student_array):
 		if (requestedBook,requestedBook_author) in self.availablebooks:
