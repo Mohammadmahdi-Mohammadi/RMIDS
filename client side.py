@@ -1,46 +1,3 @@
-# from tkinter import *
-# from functools import partial
-#
-# def validateLogin(username, password):
-# 	print("username entered :", username.get())
-# 	print("password entered :", password.get())
-# 	tkWindow.destroy()
-# 	print("verify your account")
-# 	return username.get(),password.get()
-#
-#
-# #window
-# tkWindow = Tk()
-# tkWindow.geometry('200x100')
-# tkWindow.title('Login')
-#
-# #username label and text entry box
-# usernameLabel = Label(tkWindow, text="User Name").grid(row=1, column=0)
-# username = StringVar()
-# usernameEntry = Entry(tkWindow, textvariable=username).grid(row=1, column=1)
-#
-# #password label and password entry box
-# passwordLabel = Label(tkWindow,text="Password").grid(row=2, column=0)
-# password = StringVar()
-# passwordEntry = Entry(tkWindow, textvariable=password, show='*').grid(row=2, column=1)
-#
-# validateLogin = partial(validateLogin, username, password)
-#
-# #login button
-# loginButton = Button(tkWindow, text="Login", command=validateLogin).grid(row=3, column=1)
-#
-#
-#
-# tkWindow.mainloop()
-# print("salaaaaaaaaaaaaaaaaaaam")
-
-
-
-# Task - create a program for a Library, where Students can take out and return books. The library can lend, and update the collection (when a student returns books)
-# Here we will be demonstrating abstraction and encapsulation (more on encaspulation later)
-# =======For the Library Class, layers of abstraction ==> *display available books, *lend books, *add books
-# =======For the Student Class, layers of abstraction: ==> *request a book* and *return a book*
-# Note for abstraction: You are only dealing with the important and relevant details of a library...not the irrevelant details like no. of shelves, or the cobwebs on the cielings!
 
 import sys
 
@@ -56,21 +13,22 @@ class Library:
 		for book in self.availablebooks:
 			print(book)
 
-	def addBook(self, student_array):
+	def addBook(self, student):
+		student_array = student.get_array()
 		if len(student_array) > 1:
 			print("List of books you have borrowed: ")
 			index = 1
 			for book in student_array:
 				print(index,"- ",book)
 				index += 1
-			print("Enter the desired book number in range of 1 to ",index," : ")
+			print("Enter the desired book number in range of 1 to ",index - 1," : ")
 			booknum = input()
 			while (int(booknum) > index or int(booknum) < 1):
-				print("Enter the desired book number in range of 1 to ", index, " : ")
+				print("Enter the desired book number in range of 1 to ", index - 1, " : ")
 				booknum = input()
 			add_index = int(booknum) - 1
 			self.availablebooks.append((student_array[add_index]))
-
+			student.del_b_book(int(booknum) - 1)
 			print("Thanks for returning your borrowed book")
 
 	def lendBook(self, requestedBook, requestedBook_author, student_array):
@@ -88,6 +46,8 @@ class Student:
 
 	def get_array(self):
 		return self.Borrowed_list
+	def del_b_book(self,index):
+		del self.Borrowed_list[index]
 
 	def requestBook(self):
 		print("Enter the name of the book you'd like to borrow: ")
