@@ -65,11 +65,12 @@ class Library:
 				index += 1
 			print("Enter the desired book number in range of 1 to ",index," : ")
 			booknum = input()
-			while (booknum > index or booknum < 1):
+			while (int(booknum) > index or int(booknum) < 1):
 				print("Enter the desired book number in range of 1 to ", index, " : ")
 				booknum = input()
-			add_index = booknum - 1
+			add_index = int(booknum) - 1
 			self.availablebooks.append((student_array[add_index]))
+
 			print("Thanks for returning your borrowed book")
 
 	def lendBook(self, requestedBook, requestedBook_author, student_array):
@@ -127,7 +128,8 @@ def main():
 			library.lendBook(arg1,arg2,array)
 		elif choice == 3:
 			# arg3, arg4 = student.addBook()
-			library.addBook(student.get_array())
+			array = student.get_array()
+			library.addBook(student)
 		elif choice == 4:
 			sys.exit()
 
