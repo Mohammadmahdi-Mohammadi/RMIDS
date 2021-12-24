@@ -2,7 +2,7 @@
 
 # https://stackoverflow.com/questions/3906232/python-get-the-print-output-in-an-exec-statement
 # Since Python 3.4 there is a solution is the stdlib:
-
+import time
 import sys
 from io import StringIO
 import contextlib
@@ -135,7 +135,7 @@ class Student:
 library = Library([("The Soul of a New Machine", "Tracy Kidder"),
                        ("Software and Hardware Problems and Solutions", "Simon Monk"),
                        ("Fundamentals of Superscalar Processors", "John Shen"),
-                       ("AStructured Computer Organization", "Andrew Tanenbaum"),
+                       ("Structured Computer Organization", "Andrew Tanenbaum"),
                        ("Computer Networking: A Top Down Approach", "James Kurose"),
                        ("Computer Architecture: A Quantitative Approach", "John Hennessy")])
 
@@ -176,6 +176,7 @@ def client_thread(connection):
         student = Student()
         connection.sendall(str.encode("yes"))
         while True:
+            # time.sleep(20)
             print("Check222222")
             # print("Array value is: ", r_array[0])
             data = connection.recv(2048)
@@ -185,8 +186,13 @@ def client_thread(connection):
             choice = int(data)
             print("Check4444")
             print("choose is :" , choice)
+
+
+
             if choice == 1:
                 data = library.displayAvailablebooks()
+                connection.sendall(str.encode(data))
+
 
 
             elif choice == 2:
@@ -200,10 +206,6 @@ def client_thread(connection):
                 array = student.get_array()
                 data = library.lendBook(arg1, arg2, array)
                 connection.sendall(str.encode(data))
-
-                print("Check11111")
-
-
 
 
 
@@ -222,9 +224,9 @@ def client_thread(connection):
                 break
 
             # connection.sendall(str.encode(s.getvalue()))
-            connection.sendall(str.encode(data))
+            # connection.sendall(str.encode(data))
 
-        connection.close()
+        # connection.close()
     else:
         print("authentication was unsuccessful :(")
         global ThreadCount
