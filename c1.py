@@ -79,10 +79,11 @@ if response == "yes":
 
     while True:
         Input = input("Enter Choice:")
-        clientsocket.send(str.encode(Input))
-        response = clientsocket.recv(1024)
-        response = response.decode("UTF-8")
+        print("input is: ", Input)
         if int(Input) == 1:
+            clientsocket.send(str.encode(Input))
+            response = clientsocket.recv(1024)
+            response = response.decode("UTF-8")
             responses = response.split('@')
             i = 1
             for item in responses:
@@ -93,6 +94,9 @@ if response == "yes":
                 i += 1
         print("     =================================================== ")
         if int(Input) == 2:
+            clientsocket.send(str.encode(Input))
+            response = clientsocket.recv(1024)
+            response = response.decode("UTF-8")
             print("Enter the name of the book you'd like to borrow: ")
             book = input()
             print("Enter the name of the author: ")

@@ -176,18 +176,21 @@ def client_thread(connection):
         student = Student()
         connection.sendall(str.encode("yes"))
         while True:
+            print("Check222222")
             # print("Array value is: ", r_array[0])
             data = connection.recv(2048)
+            print("Check33333")
             # print("recievd method:  ", data.decode("UTF-8"))
             data = data.decode("UTF-8")
             choice = int(data)
-
+            print("Check4444")
+            print("choose is :" , choice)
             if choice == 1:
                 data = library.displayAvailablebooks()
 
 
             elif choice == 2:
-                connection.sendall(str.encode("sen info"))
+                connection.sendall(str.encode("send info"))
                 data = connection.recv(2048)
                 data = data.decode("UTF-8")
                 data_aray = data.split("@")
@@ -197,6 +200,8 @@ def client_thread(connection):
                 array = student.get_array()
                 data = library.lendBook(arg1, arg2, array)
                 connection.sendall(str.encode(data))
+
+                print("Check11111")
 
 
 
