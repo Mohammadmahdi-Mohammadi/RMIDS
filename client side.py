@@ -56,23 +56,26 @@ class Library:
 		for book in self.availablebooks:
 			print(book)
 
-	def lendBook(self, requestedBook):
-		if requestedBook in self.availablebooks:
-			print("The book you requested has now been borrowed")
-			self.availablebooks.remove(requestedBook)
-		else:
-			print("Sorry the book you have requested is currently not in the library")
-
 	def addBook(self, returnedBook):
 		self.availablebooks.append(returnedBook)
 		print("Thanks for returning your borrowed book")
 
+	def lendBook(self, requestedBook, requestedBook_author):
+		if (requestedBook,requestedBook_author) in self.availablebooks:
+			print("The book you requested has now been borrowed")
+			self.availablebooks.remove((requestedBook,requestedBook_author))
+		else:
+			print("Sorry the book you have requested is currently not in the library")
+2
+
 
 class Student:
 	def requestBook(self):
-		print("Enter the name of the book you'd like to borrow>>")
+		print("Enter the name of the book you'd like to borrow: ")
 		self.book = input()
-		return self.book
+		print("Enter the name of the author: ")
+		self.author = input()
+		return self.book,self.author
 
 	def returnBook(self):
 		print("Enter the name of the book you'd like to return>>")
@@ -100,7 +103,9 @@ def main():
 		if choice == 1:
 			library.displayAvailablebooks()
 		elif choice == 2:
-			library.lendBook(student.requestBook())
+			arg1,arg2 = student.requestBook()
+			print("cout: ",arg1,arg2)
+			library.lendBook(arg1,arg2)
 		elif choice == 3:
 			library.addBook(student.returnBook())
 		elif choice == 4:
