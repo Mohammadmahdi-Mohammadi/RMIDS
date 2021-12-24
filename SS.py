@@ -102,6 +102,9 @@ def client_thread(connection):
         connection.close()
     else:
         print("authentication was unsuccessful :(")
+        global ThreadCount
+        if ThreadCount > 0:
+            ThreadCount -= 1
         connection.close()
 
 
@@ -132,5 +135,5 @@ while True:
     # -------------------------------------------------------------------------------------------
 
 
-    print("Threadnumber" + str(ThreadCount))
+    print("Current server status and Threadnumbers is: " + str(ThreadCount))
 socketserver.close()
