@@ -91,10 +91,22 @@ if response == "yes":
                 else:
                     print("     ",item)
                 i += 1
-        print(" =================================================== ")
-        # if Input == 2:
-        # if Input == 3:
-        # if Input == 4:
+        print("     =================================================== ")
+        if int(Input) == 2:
+            print("Enter the name of the book you'd like to borrow: ")
+            book = input()
+            print("Enter the name of the author: ")
+            author = input()
+            requestbook = book + "@" + author
+            clientsocket.send(str.encode(requestbook))
+            response = clientsocket.recv(1024)
+            response = response.decode("UTF-8")
+            print(response)
+
+
+
+        # if int(Input) == 3:
+        # if int(Input) == 4:
 
         clientsocket.send(str.encode(Input))
         response = clientsocket.recv(1024)

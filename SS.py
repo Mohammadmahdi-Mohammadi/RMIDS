@@ -93,11 +93,13 @@ class Library:
     def lendBook(self, requestedBook, requestedBook_author, student_array):
         if (requestedBook, requestedBook_author) in self.availablebooks:
             print("The book you requested has now been borrowed")
+            pm = "The book you requested has now been borrowed"
             self.availablebooks.remove((requestedBook, requestedBook_author))
             student_array.append((requestedBook, requestedBook_author))
         else:
             print("Sorry the book you have requested is currently not in the library")
-
+            pm = "Sorry the book you have requested is currently not in the library"
+        return pm
 
 
 class Student:
@@ -176,17 +178,30 @@ def client_thread(connection):
         while True:
             # print("Array value is: ", r_array[0])
             data = connection.recv(2048)
-            print("recievd method:  ", data.decode("UTF-8"))
+            # print("recievd method:  ", data.decode("UTF-8"))
             data = data.decode("UTF-8")
             choice = int(data)
 
             if choice == 1:
                 data = library.displayAvailablebooks()
+
+
             elif choice == 2:
-                arg1, arg2 = student.requestBook()
+                connection.sendall(str.encode("sen info"))
+                data = connection.recv(2048)
+                data = data.decode("UTF-8")
+                data_aray = data.split("@")
+                arg1 = data_aray[0]
+                arg2 = data_aray[1]
                 print("cout: ", arg1, arg2)
                 array = student.get_array()
-                library.lendBook(arg1, arg2, array)
+                data = library.lendBook(arg1, arg2, array)
+                connection.sendall(str.encode(data))
+
+
+
+
+
             elif choice == 3:
                 # arg3, arg4 = student.addBook()
                 array = student.get_array()
