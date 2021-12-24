@@ -81,7 +81,7 @@ if response == "yes":
         Input = input("Enter Choice:")
         print("input is: ", Input)
         if int(Input) == 1:
-            print("??????????????????")
+            # print("??????????????????")
             clientsocket.send(str.encode(Input))
             response = clientsocket.recv(1024)
             response = response.decode("UTF-8")
@@ -110,7 +110,13 @@ if response == "yes":
 
 
 
-        # if int(Input) == 3:
+        if int(Input) == 3:
+            clientsocket.send(str.encode(Input))
+            response = clientsocket.recv(1024)
+            response = response.decode("UTF-8")
+
+
+
         # if int(Input) == 4:
 
         # clientsocket.send(str.encode(Input))
