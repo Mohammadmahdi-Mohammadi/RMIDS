@@ -77,7 +77,7 @@ clientsocket.send(str.encode(check))
 response = clientsocket.recv(1024)
 response = response.decode("utf-8")
 if response == "yes":
-    print("authentication was successful :)")
+    prGreen("authentication was successful :)")
     print(""" ======LIBRARY MENU=======
                       1. Display all available books
                       2. Request a book
@@ -170,6 +170,6 @@ if response == "yes":
         # response = clientsocket.recv(1024)
 
 else:
-    print("authentication was unsuccessful :(")
+    prRed("authentication was unsuccessful :(")
 
 

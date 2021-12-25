@@ -57,25 +57,26 @@ class Library:
         return send_data
 
     def addBook(self, student):
-        student_array = student.get_array()
+        # student_array = student.get_array()
+        print("current user info: ",student.get_value())
         # pm = str(len(student_array)) + "@"
         pm= "List of books you have borrowed before:@====================================================== "
-        if len(student_array) > 0:
+        if len(student.get_array()) > 0:
             index = 1
-            for book in student_array:
+            for book in student.get_array():
                 pm = pm +  "@ " + book[0] + " | " + book[1]
                 print(index, "- ", book)
                 index += 1
             return pm
-
-            booknum = input()
-            while (int(booknum) > index - 1 or int(booknum) < 0):
-                print("Enter the desired book number in range of 1 to ", index - 1, " : ")
-                booknum = input()
-            add_index = int(booknum) - 1
-            self.availablebooks.append((student_array[add_index]))
-            student.del_b_book(int(booknum) - 1)
-            print("Thanks for returning your borrowed book")
+            #
+            # booknum = input()
+            # while (int(booknum) > index - 1 or int(booknum) < 0):
+            #     print("Enter the desired book number in range of 1 to ", index - 1, " : ")
+            #     booknum = input()
+            # add_index = int(booknum) - 1
+            # self.availablebooks.append((student_array[add_index]))
+            # student.del_b_book(int(booknum) - 1)
+            # print("Thanks for returning your borrowed book")
         else:
             print(" \n \n----------------------------------------------------------------------- \n "
                   "You have not borrowed any books from the library \n"
@@ -98,6 +99,7 @@ class Library:
 
 
     def lendBook(self, requestedBook, requestedBook_author, student_array):
+        # print("current user info: ",student.get_value())
         if (requestedBook, requestedBook_author) in self.availablebooks:
             print("The book you requested has now been borrowed")
             pm = "The book you requested has now been borrowed"
@@ -135,6 +137,18 @@ class Student:
         print("Enter the name of the book you'd like to return>>")
         self.book = input()
         return self.book
+
+
+
+
+def array_Navigation(array , value1 , value2):
+    index = 0
+    for validmember in array:
+        temp1,temp2 = validmember.get_value()
+        if ( temp1 == value1 and temp2 == value2):
+            return index
+        index += 1
+    return -1
 
 
 library = Library([("The Soul of a New Machine", "Tracy Kidder"),
@@ -182,16 +196,16 @@ def client_thread(connection):
     check = connection.recv(2048)
     check = check.decode("UTF-8")
     check_array = check.split()
-    student = security_array[0]
-    login_check = False
-    for validmember in security_array:
-        temp1,temp2 = validmember.get_value()
-        if ( temp1 == check_array[0] and temp2 == check_array[1]):
-            studet = validmember
-            login_check = True
+    # student = security_array[0]
+    login_check = array_Navigation(security_array, check_array[0],check_array[1])
+    # for validmember in security_array:
+    #     temp1,temp2 = validmember.get_value()
+    #     if ( temp1 == check_array[0] and temp2 == check_array[1]):
+    #         studet = validmember
+    #         login_check = True
 
-    if login_check:
-        print("authentication was successful :)")
+    if login_check != -1:
+        prGreen("authentication was successful :)")
         connection.sendall(str.encode("yes"))
         while True:
             # time.sleep(20)
@@ -221,7 +235,8 @@ def client_thread(connection):
                 arg1 = data_aray[0]
                 arg2 = data_aray[1]
                 print("cout: ", arg1, arg2)
-                array = student.get_array()
+                array = security_array[login_check].get_array()
+                # array = student.get_array()
                 data = library.lendBook(arg1, arg2, array)
                 connection.sendall(str.encode(data))
 
@@ -231,14 +246,14 @@ def client_thread(connection):
                 # length = len(student.get_array())
                 # length_ = str(length)
                 # connection.sendall(str.encode(length_))
-                message = library.addBook(student)
+                message = library.addBook(security_array[login_check])
                 print("message is: " , message)
                 connection.sendall(str.encode(message))
 
                 return_book = connection.recv(2048)
                 return_book = return_book.decode("UTF-8")
                 index = int(return_book)
-                message = library.Student_and_library_array_handler(index , student)
+                message = library.Student_and_library_array_handler(index , security_array[login_check])
                 print(message)
                 connection.sendall(str.encode(message))
 
