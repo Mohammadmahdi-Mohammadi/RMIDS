@@ -66,15 +66,16 @@ class Library:
 
     def addBook(self, student):
         student_array = student.get_array()
-        pm = str(len(student_array)) + "@"
+        # pm = str(len(student_array)) + "@"
+        pm= "List of books you have borrowed before:@====================================================== "
         if len(student_array) > 0:
             index = 1
             for book in student_array:
-                pm = pm + book + "@"
+                pm = pm +  "@ " + book[0] + " | " + book[1]
                 print(index, "- ", book)
                 index += 1
             return pm
-            print("Enter the desired book number in range of 1 to ", index - 1, " : ")
+
             booknum = input()
             while (int(booknum) > index - 1 or int(booknum) < 0):
                 print("Enter the desired book number in range of 1 to ", index - 1, " : ")
@@ -212,7 +213,10 @@ def client_thread(connection):
                 # length = len(student.get_array())
                 # length_ = str(length)
                 # connection.sendall(str.encode(length_))
-                library.addBook(student)
+                message = library.addBook(student)
+                print("message is: " , message)
+                connection.sendall(str.encode(message))
+
 
 
 

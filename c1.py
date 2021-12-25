@@ -114,7 +114,25 @@ if response == "yes":
             clientsocket.send(str.encode(Input))
             response = clientsocket.recv(1024)
             response = response.decode("UTF-8")
-            print("length is: ", response)
+            responses = response.split('@')
+            index = 1
+            print(responses)
+            for book in responses:
+                if index == 1 or index == 2:
+                    print("     ", book)
+                    index += 1
+
+                else:
+                    print("     ", index - 2, "- ", book)
+                    index += 1
+            print("Enter the desired book number in range of 1 to ", index - 3, " : ")
+            booknum = input()
+            while (int(booknum) > index - 1 or int(booknum) < 0):
+                print("Enter the desired book number in range of 1 to ", index - 1, " : ")
+                booknum = input()
+            add_index = int(booknum) - 1
+
+
 
 
         # if int(Input) == 4:
