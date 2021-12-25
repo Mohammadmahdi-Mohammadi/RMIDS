@@ -87,8 +87,23 @@ class Library:
         else:
             print(" \n \n----------------------------------------------------------------------- \n "
                   "You have not borrowed any books from the library \n"
-                  " and therefore it is not possible to provide services to you in this section :\  \n"
-                  "-----------------------------------------------------------------------")
+                  " and therefore it is not possible to provide services to you in this section :\  \n ")
+
+            pm = "You have not borrowed any books from the library \nand therefore it is not possible to provide services to you in this section :\  \n ---------------------------------------------------"
+            return pm
+
+    def Student_and_library_array_handler(self, index , student):
+        print ("index is: ", index)
+        student_array = student.get_array()
+        self.availablebooks.append((student_array[index]))
+        student.del_b_book(index)
+        pm = "Thanks for returning your borrowed book"
+        return pm
+
+
+
+
+
 
     def lendBook(self, requestedBook, requestedBook_author, student_array):
         if (requestedBook, requestedBook_author) in self.availablebooks:
@@ -216,6 +231,14 @@ def client_thread(connection):
                 message = library.addBook(student)
                 print("message is: " , message)
                 connection.sendall(str.encode(message))
+
+                return_book = connection.recv(2048)
+                return_book = return_book.decode("UTF-8")
+                index = int(return_book)
+                message = library.Student_and_library_array_handler(index , student)
+                print(message)
+                connection.sendall(str.encode(message))
+
 
 
 
