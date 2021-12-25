@@ -256,6 +256,7 @@ def client_thread(connection):
                 print("message is: " , message)
                 connection.sendall(str.encode(message))
 
+    
                 return_book = connection.recv(2048)
                 return_book = return_book.decode("UTF-8")
                 index = int(return_book)
