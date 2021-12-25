@@ -78,10 +78,19 @@ if response == "yes":
                       """)
 
     while True:
+        print("Check1111111")
+
         Input = input("Enter Choice:")
+        # print("Check222222")
+        # print(type(Input))
+        while ( not Input.isnumeric()):
+            Input = input("Please enter a number! : ")
+
         print("input is: ", Input)
         if int(Input) == 1:
-            print("??????????????????")
+            print("Check33333")
+
+            # print("??????????????????")
             clientsocket.send(str.encode(Input))
             response = clientsocket.recv(1024)
             response = response.decode("UTF-8")
@@ -107,10 +116,46 @@ if response == "yes":
             response = clientsocket.recv(1024)
             response = response.decode("UTF-8")
             print(response)
+            print("Check222222")
 
 
 
-        # if int(Input) == 3:
+
+        if int(Input) == 3:
+            clientsocket.send(str.encode(Input))
+            response = clientsocket.recv(1024)
+            response = response.decode("UTF-8")
+            if "@" in response:
+                responses = response.split('@')
+                index = 1
+                print(responses)
+                for book in responses:
+                    if index == 1 or index == 2:
+                        print("     ", book)
+                        index += 1
+
+                    else:
+                        print("     ", index - 2, "- ", book)
+                        index += 1
+                print("Enter the desired book number in range of 1 to ", index - 3, " : ")
+                booknum = input()
+                while (int(booknum) > index - 1 or int(booknum) < 0):
+                    print("Enter the desired book number in range of 1 to ", index - 1, " : ")
+                    booknum = input()
+                add_index = int(booknum) - 1
+                add_index_final = str(add_index)
+                clientsocket.send(str.encode(add_index_final))
+                response = clientsocket.recv(1024)
+                response = response.decode("UTF-8")
+                print(response)
+
+
+
+            else:
+                print(response)
+
+
+
         # if int(Input) == 4:
 
         # clientsocket.send(str.encode(Input))

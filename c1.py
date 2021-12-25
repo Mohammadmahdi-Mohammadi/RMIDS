@@ -81,10 +81,11 @@ if response == "yes":
         print("Check1111111")
 
         Input = input("Enter Choice:")
-        print("Check222222")
+        # print("Check222222")
+        # print(type(Input))
+        while ( not Input.isnumeric()):
+            Input = input("Please enter a number! : ")
 
-        while  Input is not int:
-            print("please Enter ")
         print("input is: ", Input)
         if int(Input) == 1:
             print("Check33333")
