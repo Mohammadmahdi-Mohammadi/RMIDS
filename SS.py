@@ -158,25 +158,12 @@ def array_Navigation(array , value1 , value2):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 library = Library([("The Soul of a New Machine", "Tracy Kidder"),
                        ("Software and Hardware Problems and Solutions", "Simon Monk"),
                        ("Fundamentals of Superscalar Processors", "John Shen"),
                        ("Structured Computer Organization", "Andrew Tanenbaum"),
                        ("Computer Networking: A Top Down Approach", "James Kurose"),
                        ("Computer Architecture: A Quantitative Approach", "John Hennessy")])
-
-
 
 
 
@@ -299,7 +286,6 @@ def client_thread(connection):
         if ThreadCount > 0:
             ThreadCount -= 1
         connection.close()
-
 
 
 while True:
