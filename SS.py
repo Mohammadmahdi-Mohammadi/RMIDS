@@ -211,6 +211,7 @@ def client_thread(connection):
 
     if login_check != -1:
         prGreen("authentication was successful :)")
+        print("Current user info is: " , security_array[login_check].get_value())
         connection.sendall(str.encode("yes"))
         while True:
             # time.sleep(20)
@@ -261,6 +262,7 @@ def client_thread(connection):
                 message = library.Student_and_library_array_handler(index , security_array[login_check])
                 print(message)
                 connection.sendall(str.encode(message))
+
 
 
 
