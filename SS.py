@@ -20,6 +20,15 @@ def stdoutIO(stdout=None):
     #     exec(data)
     #
     # print("out:", s.getvalue())
+
+def prRed(skk): print("\033[91m {}\033[00m" .format(skk))
+def prGreen(skk): print("\033[92m {}\033[00m" .format(skk))
+def prYellow(skk): print("\033[93m {}\033[00m" .format(skk))
+def prLightPurple(skk): print("\033[94m {}\033[00m" .format(skk))
+def prPurple(skk): print("\033[95m {}\033[00m" .format(skk))
+def prCyan(skk): print("\033[96m {}\033[00m" .format(skk))
+def prLightGray(skk): print("\033[97m {}\033[00m" .format(skk))
+def prBlack(skk): print("\033[98m {}\033[00m" .format(skk))
 # --------------------------------------------------------------
 
 import socket
@@ -31,24 +40,7 @@ serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 host = socket.gethostname()
 port = 10000
 ThreadCount = 0
-r_array =  ["Ford", "Volvo", "BMW"]
 
-
-#------------------------------------------------------------------------------
-# class university:
-#     def __init__(self):
-#
-#         self.country = "Iran"
-#         self.city = "Tehran"
-#         self.address = "No. 350, Hafez Ave, Valiasr Square"
-#         self.name = "Amirkabir University of Technology"
-#         self.contact_array =  {"tel" : "+98(21)66419506" , "fax" : "+98(21)66495519" , "email" : "pheeaut.ac.ir"}
-#
-#     def contact_Info(self):
-#         return self.contact_array
-#     def phone(self):
-#         print(self.address)
-#         return self.country
 
 class Library:
     def __init__(self, listofbooks):
@@ -119,6 +111,12 @@ class Library:
 
 class Student:
     Borrowed_list = []
+    def __init__(self, name , password):
+        self.name = name;
+        self.password = password;
+
+    def get_value(self):
+        return self.name,self.password
 
     def get_array(self):
         return self.Borrowed_list
@@ -139,20 +137,15 @@ class Student:
         return self.book
 
 
-
-
-
-# _____________________________________________________________
-
-# AUT = university()
-# AUT.phone()
-
 library = Library([("The Soul of a New Machine", "Tracy Kidder"),
                        ("Software and Hardware Problems and Solutions", "Simon Monk"),
                        ("Fundamentals of Superscalar Processors", "John Shen"),
                        ("Structured Computer Organization", "Andrew Tanenbaum"),
                        ("Computer Networking: A Top Down Approach", "James Kurose"),
                        ("Computer Architecture: A Quantitative Approach", "John Hennessy")])
+
+
+
 
 
 
@@ -167,28 +160,38 @@ except:
 
 # _____________________________________________________________
 
-security_array = [("ali","1985"),("amir","1998"),("hamid","2000")]
+member1 = Student("ali","1985")
+member2 = Student("amir" , "1998")
+member3 = Student("hamid" , "2000")
+security_array = [member1 , member2, member3]
+
 
 # _____________________________________________________________
 
-
-print("Waiting for connection an client .... ")
+prYellow("Waiting for connection an client .... ")
 serversocket.listen(5)
 # the argument to listen tells the socket library that we want it to queue up
 # as many as 5 connect requests (the normal max) before refusing outside connections.
 # If the rest of the code is written properly, that should be plenty
 # Ref: https://docs.python.org/3/howto/sockets.html
 
-print("??1??")
+
 def client_thread(connection):
     print("??2??")
-    connection.send(str.encode("Welcome to the server"))
+    connection.send(str.encode("Welcome to the Library\n please Enter your information"))
     check = connection.recv(2048)
     check = check.decode("UTF-8")
     check_array = check.split()
-    if (check_array[0],check_array[1]) in security_array:
+    student = security_array[0]
+    login_check = False
+    for validmember in security_array:
+        temp1,temp2 = validmember.get_value()
+        if ( temp1 == check_array[0] and temp2 == check_array[1]):
+            studet = validmember
+            login_check = True
+
+    if login_check:
         print("authentication was successful :)")
-        student = Student()
         connection.sendall(str.encode("yes"))
         while True:
             # time.sleep(20)
@@ -266,19 +269,21 @@ def client_thread(connection):
 
 
 
-
-print("??3??")
-
 while True:
     # print("??4??")
     # print(serversocket.accept())
-    print("??4??")
+    # print("??4??")
     # if not serversocket.accept():
     #     print("threre isn't anyone!")
 
+
+
     client,address = serversocket.accept()
+    prRed("\n ==============================================================")
+    prGreen("Server status report: ")
+    print("A new client connected with the following information:")
     print("here is client: ",  client)
-    print("here is ip: " ,  address)
+    print("Communication information: " ,  address)
     print("connected to " + address[0] +"   " + str(address[1]))
 
     # -------------------------------------------------------------------------------------------
@@ -292,5 +297,6 @@ while True:
     # -------------------------------------------------------------------------------------------
 
 
-    print("Current server status and Threadnumbers is: " + str(ThreadCount))
+    print("Number of connected users: " + str(ThreadCount))
+    prRed("==============================================================\n")
 socketserver.close()
