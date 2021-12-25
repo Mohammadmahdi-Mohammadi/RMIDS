@@ -87,8 +87,9 @@ class Library:
 
     def Student_and_library_array_handler(self, index , student):
         print ("index is: ", index)
-        student_array = student.get_array()
-        self.availablebooks.append((student_array[index]))
+        # student_array = student.get_array()
+        new_book, new_author = student.get_array_value(index)
+        self.availablebooks.append((new_book,new_author))
         student.del_b_book(index)
         pm = "Thanks for returning your borrowed book"
         return pm
@@ -122,6 +123,9 @@ class Student:
 
     def get_array(self):
         return self.Borrowed_list
+
+    def get_array_value(self,index):
+        return self.Borrowed_list[index]
 
     def del_b_book(self, index):
         del self.Borrowed_list[index]

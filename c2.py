@@ -1,6 +1,14 @@
 import socket
 from tkinter import *
 from functools import partial
+def prRed(skk): print("\033[91m {}\033[00m" .format(skk))
+def prGreen(skk): print("\033[92m {}\033[00m" .format(skk))
+def prYellow(skk): print("\033[93m {}\033[00m" .format(skk))
+def prLightPurple(skk): print("\033[94m {}\033[00m" .format(skk))
+def prPurple(skk): print("\033[95m {}\033[00m" .format(skk))
+def prCyan(skk): print("\033[96m {}\033[00m" .format(skk))
+def prLightGray(skk): print("\033[97m {}\033[00m" .format(skk))
+def prBlack(skk): print("\033[98m {}\033[00m" .format(skk))
 
 __user = ""
 __pass = ""
@@ -35,7 +43,7 @@ except:
 #     print(str(e))
 
 Response = clientsocket.recv(1024)
-print(Response.decode("utf-8"))
+prGreen(Response.decode("utf-8"))
 
 
 
@@ -69,7 +77,7 @@ clientsocket.send(str.encode(check))
 response = clientsocket.recv(1024)
 response = response.decode("utf-8")
 if response == "yes":
-    print("authentication was successful :)")
+    prGreen("authentication was successful :)")
     print(""" ======LIBRARY MENU=======
                       1. Display all available books
                       2. Request a book
@@ -162,6 +170,6 @@ if response == "yes":
         # response = clientsocket.recv(1024)
 
 else:
-    print("authentication was unsuccessful :(")
+    prRed("authentication was unsuccessful :(")
 
 
