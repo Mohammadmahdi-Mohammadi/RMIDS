@@ -113,10 +113,10 @@ class Library:
 
 
 class Student:
-    Borrowed_list = []
     def __init__(self, name , password):
         self.name = name;
         self.password = password;
+        self.Borrowed_list = []
 
     def get_value(self):
         return self.name,self.password
@@ -188,13 +188,6 @@ security_array = [member1 , member2, member3]
 # _____________________________________________________________
 
 prYellow("Waiting for connection an client .... ")
-serversocket.listen(5)
-# the argument to listen tells the socket library that we want it to queue up
-# as many as 5 connect requests (the normal max) before refusing outside connections.
-# If the rest of the code is written properly, that should be plenty
-# Ref: https://docs.python.org/3/howto/sockets.html
-
-
 def client_thread(connection):
     print("??2??")
     connection.send(str.encode("Welcome to the Library\n please Enter your information"))
@@ -240,10 +233,13 @@ def client_thread(connection):
                 data_aray = data.split("@")
                 arg1 = data_aray[0]
                 arg2 = data_aray[1]
-                print("cout: ", arg1, arg2)
-                array = security_array[login_check].get_array()
+                # print("cout: ", arg1, arg2)
                 # array = student.get_array()
-                data = library.lendBook(arg1, arg2, array)
+                print("current user is: ", security_array[login_check].get_value())
+                print("before ---> current user array is : ", security_array[login_check].get_array())
+                data = library.lendBook(arg1, arg2, security_array[login_check].get_array())
+                print("after -----> current user array is : ", security_array[login_check].get_array())
+
                 connection.sendall(str.encode(data))
 
 
@@ -252,11 +248,12 @@ def client_thread(connection):
                 # length = len(student.get_array())
                 # length_ = str(length)
                 # connection.sendall(str.encode(length_))
+
                 message = library.addBook(security_array[login_check])
                 print("message is: " , message)
                 connection.sendall(str.encode(message))
 
-    
+
                 return_book = connection.recv(2048)
                 return_book = return_book.decode("UTF-8")
                 index = int(return_book)
@@ -289,6 +286,13 @@ def client_thread(connection):
         if ThreadCount > 0:
             ThreadCount -= 1
         connection.close()
+# the argument to listen tells the socket library that we want it to queue up
+# as many as 5 connect requests (the normal max) before refusing outside connections.
+# If the rest of the code is written properly, that should be plenty
+# Ref: https://docs.python.org/3/howto/sockets.html
+
+
+serversocket.listen(5)
 
 
 while True:
