@@ -65,16 +65,15 @@ class Library:
         return send_data
 
     def addBook(self, student):
-        # print("hhhhhhhhhhhhh")
         student_array = student.get_array()
-        # print("hhhhhhhhhhhhhggggggg")
+        pm = str(len(student_array)) + "@"
         if len(student_array) > 0:
-            # print("hhhhhhh23452hhhhhhggggggg")
-            # print("List of books you have borrowed: ")
             index = 1
             for book in student_array:
+                pm = pm + book + "@"
                 print(index, "- ", book)
                 index += 1
+            return pm
             print("Enter the desired book number in range of 1 to ", index - 1, " : ")
             booknum = input()
             while (int(booknum) > index - 1 or int(booknum) < 0):
@@ -210,9 +209,13 @@ def client_thread(connection):
 
 
             elif choice == 3:
-                # arg3, arg4 = student.addBook()
-                array = student.get_array()
+                # length = len(student.get_array())
+                # length_ = str(length)
+                # connection.sendall(str.encode(length_))
                 library.addBook(student)
+
+
+
             elif choice == 4:
                 connection.close()
             # with stdoutIO() as s:

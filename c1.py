@@ -114,7 +114,7 @@ if response == "yes":
             clientsocket.send(str.encode(Input))
             response = clientsocket.recv(1024)
             response = response.decode("UTF-8")
-
+            print("length is: ", response)
 
 
         # if int(Input) == 4:
