@@ -95,7 +95,6 @@ class Library:
     def __init__(self, listofbooks):
         self.availablebooks = listofbooks
 
-
     def displayAvailablebooks(self):
         print("The books we have in our library are as follows:")
         print("====================================================== ")
@@ -142,11 +141,6 @@ class Library:
         student.del_b_book(index)
         pm = "Thanks for returning your borrowed book"
         return pm
-
-
-
-
-
 
     def lendBook(self, requestedBook, requestedBook_author, student_array):
         # print("current user info: ",student.get_value())
@@ -304,10 +298,12 @@ def client_thread(connection):
                 print(message)
                 connection.sendall(str.encode(message))
 
+
+
             elif choice == 4:
-                global ThreadCount
-                if ThreadCount > 0:
-                    ThreadCount -= 1
+                # global ThreadCount
+                # if ThreadCount > 0:
+                #     ThreadCount -= 1
                 connection.close()
             # with stdoutIO() as s:
             #     exec(data)
@@ -315,6 +311,7 @@ def client_thread(connection):
             # print("out:", s.getvalue())
 
             if not data:
+                # to stop free client's True loop
                 break
 
             # connection.sendall(str.encode(s.getvalue()))
@@ -362,7 +359,8 @@ while True:
     #         function with the argument list args (which must be a tuple). The optional kwargs
     #         argument specifies a dictionary of keyword arguments.
     #         When the function returns, the thread silently exits.
-    start_new_thread(client_thread , (client,))
+
+    start_new_thread(client_thread , (client,) )
     ThreadCount += 1
     # -------------------------------------------------------------------------------------------
 
