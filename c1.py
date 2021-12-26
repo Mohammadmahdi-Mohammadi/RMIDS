@@ -1,5 +1,6 @@
 # Created by Mohammadmahdi_Mohammadi on 25/12/21.
-# available on github.com/Mohammadmahdi-Mohammadi
+# available on github.com/Mohammadmahdi-Mohammadi/RMIDS
+
 
 import socket
 import time

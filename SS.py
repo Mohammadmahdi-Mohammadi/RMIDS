@@ -1,7 +1,6 @@
 # --------------------------------------------------------------
 # Created by Mohammadmahdi_Mohammadi on 25/12/21.
-# available on github.com/Mohammadmahdi-Mohammadi
-
+# available on github.com/Mohammadmahdi-Mohammadi/RMIDS
 
 # -------------------------------------------------------------------------------------------
 # copyright:https://stackoverflow.com/questions/3173320/text-progress-bar-in-terminal-with-block-characters
