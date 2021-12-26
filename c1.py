@@ -312,6 +312,7 @@ if response == "yes":
 
         elif int(Input) == 5:
             clientsocket.send(str.encode(Input))
+
             response = clientsocket.recv(1024)
             response = response.decode("UTF-8")
             print("response is: ", response)
@@ -334,9 +335,9 @@ if response == "yes":
 
                     clientsocket.send(str.encode(Enter))
 
-                    response = clientsocket.recv(1024)
-                    response = response.decode("UTF-8")
-                    print("response is: ", response)
+                    # response = clientsocket.recv(1024)
+                    # response = response.decode("UTF-8")
+                    # print("response is: ", response)
                     print("Enter is: ",Enter)
                     if int(Enter) == 1:
                         prRed("Obviously, any semantic and syntax errors will cause crash on the server side!")
@@ -346,10 +347,19 @@ if response == "yes":
 
                     if int(Enter) == 2:
                         prCyan("Download is going to start ... ")
-                        clientsocket.sendall(str.encode("Nothing"))
+
+                        # pm
                         response1 = clientsocket.recv(2048)
                         response1 = response1.decode("UTF-8")
                         print("response is: ", response1)
+
+
+                        clientsocket.sendall(str.encode("done"))
+                        print("cheeeeck")
+                        response1 = clientsocket.recv(2048)
+                        response1 = response1.decode("UTF-8")
+                        print("attach is: ", response1)
+
 
 
 

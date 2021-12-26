@@ -312,6 +312,7 @@ def client_thread(connection):
             elif choice == 5:
                 connection.sendall(str.encode("possible"))
                 print("1111111111111")
+
                 admin_choose = connection.recv(2048)
                 admin_choose = admin_choose.decode("UTF-8")
                 print("1111111111111")
@@ -340,18 +341,20 @@ def client_thread(connection):
                     for student in security_array:
                         pm = pm + "@"  + student.get_value_to_migrate()
                         for book in student.get_array():
-                            pm_attach = pm_attach + "$" + book
+                            print("book: ", book)
+                            pm_attach = pm_attach + "$" + book[0] + book[1]
                         pm_attach = pm_attach + "@"
                     connection.send(str.encode(pm))
-
                     print("pm is: ", pm)
+                    print("cheeeeck")
 
-
-
-
-
-
-
+                    admin_command3 = connection.recv(2048)
+                    admin_command3 = admin_command3.decode("UTF-8")
+                    print("cheeeeck")
+                    if admin_command3 == "done":
+                        connection.send(str.encode(pm_attach))
+                    else:
+                        print(admin_command3)
 
 
             elif choice == 4:
