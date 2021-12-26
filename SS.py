@@ -62,7 +62,7 @@ class Library:
         # student_array = student.get_array()
         print("current user info: ",student.get_value())
         # pm = str(len(student_array)) + "@"
-        pm= "List of books you have borrowed before:@============================================================== "
+        pm= "List of books you have borrowed before:@==================================================== "
         if len(student.get_array()) > 0:
             index = 1
             for book in student.get_array():
@@ -326,6 +326,6 @@ while True:
     # -------------------------------------------------------------------------------------------
 
 
-    print("Number of connected users: " + str(ThreadCount))
+    print("Number of accepted clients: " + str(ThreadCount))
     prRed("\n==============================================================")
 socketserver.close()

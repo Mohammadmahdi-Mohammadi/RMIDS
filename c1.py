@@ -5,6 +5,31 @@ import socket
 import time
 from tkinter import *
 from functools import partial
+
+# -------------------------------------------------------------------------------------------
+# copyright:https://stackoverflow.com/questions/3173320/text-progress-bar-in-terminal-with-block-characters
+# Print iterations progress
+def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, length = 100, fill = '█', printEnd = "\r"):
+    """
+    Call in a loop to create terminal progress bar
+    @params:
+        iteration   - Required  : current iteration (Int)
+        total       - Required  : total iterations (Int)
+        prefix      - Optional  : prefix string (Str)
+        suffix      - Optional  : suffix string (Str)
+        decimals    - Optional  : positive number of decimals in percent complete (Int)
+        length      - Optional  : character length of bar (Int)
+        fill        - Optional  : bar fill character (Str)
+        printEnd    - Optional  : end character (e.g. "\r", "\r\n") (Str)
+    """
+    percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
+    filledLength = int(length * iteration // total)
+    bar = fill * filledLength + '-' * (length - filledLength)
+    print(f'\r{prefix} |{bar}| {percent}% {suffix}', end = printEnd)
+    # Print New Line on Complete
+    if iteration == total:
+        print()
+# -------------------------------------------------------------------------------------------------------
 def prRed(skk): print("\033[91m {}\033[00m" .format(skk))
 def prGreen(skk): print("\033[92m {}\033[00m" .format(skk))
 def prYellow(skk): print("\033[93m {}\033[00m" .format(skk))
@@ -13,6 +38,7 @@ def prPurple(skk): print("\033[95m {}\033[00m" .format(skk))
 def prCyan(skk): print("\033[96m {}\033[00m" .format(skk))
 def prLightGray(skk): print("\033[97m {}\033[00m" .format(skk))
 def prBlack(skk): print("\033[98m {}\033[00m" .format(skk))
+# ------------------------------------------------------------------------------
 
 __user = ""
 __pass = ""
@@ -21,7 +47,13 @@ def validateLogin(username, password):
     # print("username entered :", username.get())
     # print("password entered :", password.get(),"\n","we are going to verify your account ... ")
     prYellow(   "we are going to verify your account ... ")
-    time.sleep(2)
+    time.sleep(1)
+    prRed("...")
+    time.sleep(1)
+    prRed("...")
+    time.sleep(1)
+    prRed("...")
+    # time.sleep(1)
     # print("we are going to verify your account")
 
     __user = username.get()
@@ -127,7 +159,9 @@ if response == "yes":
             clientsocket.send(str.encode(requestbook))
             response = clientsocket.recv(1024)
             response = response.decode("UTF-8")
-            print(response)
+            prRed(response)
+            prYellow("     =================================================== ")
+
             # print("Check222222")
 
 
@@ -140,7 +174,7 @@ if response == "yes":
             if "@" in response:
                 responses = response.split('@')
                 index = 1
-                print(responses)
+                # print(responses)
                 for book in responses:
                     if index == 1 or index == 2:
                         print("     ", book)
@@ -152,19 +186,21 @@ if response == "yes":
                 print("Enter the desired book number in range of 1 to ", index - 3, " : ")
                 booknum = input()
                 while (int(booknum) > index - 1 or int(booknum) < 0):
-                    print("Enter the desired book number in range of 1 to ", index - 1, " : ")
+                    print("\n           Enter the desired book number in range of 1 to ", index - 1, " : ")
                     booknum = input()
                 add_index = int(booknum) - 1
                 add_index_final = str(add_index)
                 clientsocket.send(str.encode(add_index_final))
                 response = clientsocket.recv(1024)
                 response = response.decode("UTF-8")
-                print(response)
+                prRed(response)
+                prYellow("     =================================================== ")
+
 
 
 
             else:
-                print(response)
+                prRed(response)
 
 
 

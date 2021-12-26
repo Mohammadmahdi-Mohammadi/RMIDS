@@ -1,4 +1,8 @@
+# Created by Mohammadmahdi_Mohammadi on 25/12/21.
+# available on github.com/Mohammadmahdi-Mohammadi
+
 import socket
+import time
 from tkinter import *
 from functools import partial
 def prRed(skk): print("\033[91m {}\033[00m" .format(skk))
@@ -14,8 +18,10 @@ __user = ""
 __pass = ""
 def validateLogin(username, password):
     global __user,__pass
-    print("username entered :", username.get())
-    print("password entered :", password.get(),"\n","we are going to verify your account ... ")
+    # print("username entered :", username.get())
+    # print("password entered :", password.get(),"\n","we are going to verify your account ... ")
+    prYellow(   "we are going to verify your account ... ")
+    time.sleep(2)
     # print("we are going to verify your account")
 
     __user = username.get()
@@ -69,7 +75,6 @@ loginButton = Button(tkWindow, text="Login", command=validateLogin).grid(row=3, 
 
 tkWindow.mainloop()
 
-print("current is:    " , __user , __pass)
 
 
 check = __user + " " + __pass
@@ -78,15 +83,15 @@ response = clientsocket.recv(1024)
 response = response.decode("utf-8")
 if response == "yes":
     prGreen("authentication was successful :)")
-    print(""" ======LIBRARY MENU=======
+    print("you're currently login as:    ", __user)
+    prYellow("""                       ======LIBRARY MENU=======
                       1. Display all available books
                       2. Request a book
                       3. Return a book
-                      4. Exit
-                      """)
+                      4. Exit""")
 
     while True:
-        print("Check1111111")
+        # print("Check1111111")
 
         Input = input("Enter Choice:")
         # print("Check222222")
@@ -94,10 +99,9 @@ if response == "yes":
         while ( not Input.isnumeric()):
             Input = input("Please enter a number! : ")
 
-        print("input is: ", Input)
+        # print("input is: ", Input)
         if int(Input) == 1:
-            print("Check33333")
-
+            # print("Check33333")
             # print("??????????????????")
             clientsocket.send(str.encode(Input))
             response = clientsocket.recv(1024)
@@ -110,21 +114,21 @@ if response == "yes":
                 else:
                     print("     ",item)
                 i += 1
-        print("     =================================================== ")
+        prYellow("     =================================================== ")
         if int(Input) == 2:
             clientsocket.send(str.encode(Input))
             response = clientsocket.recv(1024)
             response = response.decode("UTF-8")
-            print("Enter the name of the book you'd like to borrow: ")
+            prGreen("Enter the name of the book you'd like to borrow: ")
             book = input()
-            print("Enter the name of the author: ")
+            prGreen("Enter the name of the author: ")
             author = input()
             requestbook = book + "@" + author
             clientsocket.send(str.encode(requestbook))
             response = clientsocket.recv(1024)
             response = response.decode("UTF-8")
             print(response)
-            print("Check222222")
+            # print("Check222222")
 
 
 
@@ -164,7 +168,11 @@ if response == "yes":
 
 
 
-        # if int(Input) == 4:
+
+        if int(Input) == 4:
+            print("Connection terminated. ")
+            clientsocket.close()
+            break
 
         # clientsocket.send(str.encode(Input))
         # response = clientsocket.recv(1024)
