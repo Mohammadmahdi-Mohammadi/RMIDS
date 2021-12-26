@@ -1,7 +1,24 @@
 # --------------------------------------------------------------
 # Created by Mohammadmahdi_Mohammadi on 25/12/21.
 # available on github.com/Mohammadmahdi-Mohammadi/RMIDS
+# --------------------------------------------------------------
 
+#Remote invocation makes the objects and methods of the remote server call
+# in much the same way as the local objects and methods, because we hide them
+# all by network programming. Remote invocation is the foundation of distributed systems.
+# Remote invocation is generally divided into two types, remote procedure call (RPC) and remote method call (RMI)
+
+# RMI
+# RMI, which stands for remote method call, is more granular than RPC because its basic unit is an object.
+# The general idea is to create an RMI server object, register one of the instantiated objects in the RMI server
+# object with the specified service name (it can also be multiple objects, but the service name should not be the same),
+# and then start the RMI server. The server waits for the data sent by the client (including the service name, function name, parameters)
+# and returns the processing results to the client
+
+# RPC
+# RPC belongs to the remote call at the function level, and it mostly transmits data through HTTP
+# in the form of XML, JSON, serialized data, etc. Here's an example of xml-rpc in python.
+# Ref: ofstack.com/
 # -------------------------------------------------------------------------------------------
 # copyright:https://stackoverflow.com/questions/3173320/text-progress-bar-in-terminal-with-block-characters
 # Print iterations progress
@@ -57,7 +74,6 @@ def prCyan(skk): print("\033[96m {}\033[00m" .format(skk))
 def prLightGray(skk): print("\033[97m {}\033[00m" .format(skk))
 def prBlack(skk): print("\033[98m {}\033[00m" .format(skk))
 # --------------------------------------------------------------
-
 import socket
 from _thread import *
 serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -67,7 +83,7 @@ serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 host = socket.gethostname()
 port = 10000
 ThreadCount = 0
-
+# --------------------------------------------------------------
 
 class Library:
     def __init__(self, listofbooks):
@@ -138,7 +154,7 @@ class Library:
             pm = "Sorry the book you have requested is currently not in the library"
         return pm
 
-
+# --------------------------------------------------------------
 
 class Student:
     def __init__(self, name , password):
@@ -170,9 +186,7 @@ class Student:
         self.book = input()
         return self.book
 
-
-
-
+# --------------------------------------------------------------
 
 def array_Navigation(array , value1 , value2):
     index = 0
@@ -183,8 +197,7 @@ def array_Navigation(array , value1 , value2):
         index += 1
     return -1
 
-
-
+# --------------------------------------------------------------
 
 library = Library([("The Soul of a New Machine", "Tracy Kidder"),
                        ("Software and Hardware Problems and Solutions", "Simon Monk"),
@@ -192,10 +205,6 @@ library = Library([("The Soul of a New Machine", "Tracy Kidder"),
                        ("Structured Computer Organization", "Andrew Tanenbaum"),
                        ("Computer Networking: A Top Down Approach", "James Kurose"),
                        ("Computer Architecture: A Quantitative Approach", "John Hennessy")])
-
-
-
-
 # When an error occurs, or exception as we call it,
 # Python will normally stop and generate an error message.
 try:
@@ -212,10 +221,10 @@ member2 = Student("amir" , "1998")
 member3 = Student("hamid" , "2000")
 security_array = [member1 , member2, member3]
 # static security implementation
+prYellow("Waiting for connection an client .... ")
 
 # _____________________________________________________________
 
-prYellow("Waiting for connection an client .... ")
 def client_thread(connection):
     # print("??2??")
     connection.send(str.encode("Welcome to the Library\n please Enter your information"))
@@ -314,13 +323,16 @@ def client_thread(connection):
         if ThreadCount > 0:
             ThreadCount -= 1
         connection.close()
+
+# --------------------------------------------------------------
+
 # the argument to listen tells the socket library that we want it to queue up
 # as many as 5 connect requests (the normal max) before refusing outside connections.
 # If the rest of the code is written properly, that should be plenty
 # Ref: https://docs.python.org/3/howto/sockets.html
-
-
 serversocket.listen(5)
+
+# --------------------------------------------------------------
 
 
 while True:
