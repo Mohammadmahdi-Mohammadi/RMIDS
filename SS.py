@@ -1,4 +1,6 @@
 # --------------------------------------------------------------
+# Created by Mohammadmahdi_Mohammadi on 25/12/21.
+# available on github.com/Mohammadmahdi-Mohammadi
 
 # https://stackoverflow.com/questions/3906232/python-get-the-print-output-in-an-exec-statement
 # Since Python 3.4 there is a solution is the stdlib:
@@ -60,7 +62,7 @@ class Library:
         # student_array = student.get_array()
         print("current user info: ",student.get_value())
         # pm = str(len(student_array)) + "@"
-        pm= "List of books you have borrowed before:@====================================================== "
+        pm= "List of books you have borrowed before:@============================================================== "
         if len(student.get_array()) > 0:
             index = 1
             for book in student.get_array():
@@ -306,7 +308,7 @@ while True:
 
 
     client,address = serversocket.accept()
-    prRed("\n ==============================================================")
+    prRed("\n==============================================================")
     prGreen("Server status report: ")
     print("A new client connected with the following information:")
     print("here is client: ",  client)
@@ -325,5 +327,5 @@ while True:
 
 
     print("Number of connected users: " + str(ThreadCount))
-    prRed("==============================================================\n")
+    prRed("\n==============================================================")
 socketserver.close()
