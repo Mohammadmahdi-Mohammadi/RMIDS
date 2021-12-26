@@ -316,7 +316,8 @@ def client_thread(connection):
                 admin_choose = admin_choose.decode("UTF-8")
                 print("1111111111111")
                 print("admin_choose: ", admin_choose)
-                connection.sendall(str.encode("possible"))
+                # connection.sendall(str.encode("possible"))
+
                 if int(admin_choose) == 1:
                     # print("1111111111111")
                     # print("1111111111111")
@@ -329,9 +330,11 @@ def client_thread(connection):
 
                 if int(admin_choose) == 2:
 
-                    admin_command = connection.recv(2048)
-                    admin_command = admin_command.decode("UTF-8")
-                    print("admin_command: ", admin_command)
+                    # admin_command = connection.recv(2048)
+                    # admin_command = admin_command.decode("UTF-8")
+
+                    print("helloo")
+                    # print("admin_command: ", admin_command)
                     pm = str(len(security_array))
                     pm_attach = "nothing"
                     for student in security_array:
@@ -340,6 +343,7 @@ def client_thread(connection):
                             pm_attach = pm_attach + "$" + book
                         pm_attach = pm_attach + "@"
                     connection.send(str.encode(pm))
+
                     print("pm is: ", pm)
 
 

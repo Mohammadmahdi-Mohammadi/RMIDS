@@ -226,7 +226,6 @@ if response == "yes":
                       2. Request a book
                       3. Return a book
                       4. Exit
-                      
                       5. administrator(not available for users)""")
 
     while True:
@@ -313,40 +312,51 @@ if response == "yes":
 
         elif int(Input) == 5:
             clientsocket.send(str.encode(Input))
-            if admin_check:
-                prRed("administrator attention: ")
-                prGreen("you are login to server as a administrator and every command will execute on the server directly!")
-                prYellow("1 ----> press 1 to remote code execution on the  server")
-                prYellow("2 ----> press 2 to download all library members as a object")
-                Enter = input("Enter number: ")
-                while (not Enter.isnumeric()) or int(Enter) < 1 or int(Enter) > 2:
-                    Enter = input("Please enter a number! : ")
-                clientsocket.send(str.encode(Enter))
-                response = clientsocket.recv(1024)
-                response = response.decode("UTF-8")
-                print("response is: ", response)
-                if (response != "possible"):
-                    print("server is not ready to execute code")
-                print("Enter is: ",Enter)
-                if int(Enter) == 1:
-                    prRed("Obviously, any semantic and syntax errors will cause crash on the server side!")
-                    # print("Enter your command: ")
-                    command = input("Enter your command: ")
-                    clientsocket.sendall(str.encode(command))
-
-                if int(Enter) == 2:
-                    prCyan("Download is going to start ... ")
-                    clientsocket.sendall(str.encode("Nothing"))
-                    response1 = clientsocket.recv(2048)
-                    response1 = response1.decode("UTF-8")
-                    print("response is: ", response1)
-
-
-
-
+            response = clientsocket.recv(1024)
+            response = response.decode("UTF-8")
+            print("response is: ", response)
+            if (response != "possible"):
+                print("server is not ready to execute code")
 
             else:
-                prRed("you are not admin and this item not available for you")
+
+                if admin_check:
+                    # response = clientsocket.recv(1024)
+                    # response = response.decode("UTF-8")
+
+                    prRed("administrator attention: ")
+                    prGreen("you are login to server as a administrator and every command will execute on the server directly!")
+                    prYellow("1 ----> press 1 to remote code execution on the  server")
+                    prYellow("2 ----> press 2 to download all library members as a object")
+                    Enter = input("Enter number: ")
+                    while (not Enter.isnumeric()) or int(Enter) < 1 or int(Enter) > 2:
+                        Enter = input("Please enter a number! : ")
+
+                    clientsocket.send(str.encode(Enter))
+
+                    response = clientsocket.recv(1024)
+                    response = response.decode("UTF-8")
+                    print("response is: ", response)
+                    print("Enter is: ",Enter)
+                    if int(Enter) == 1:
+                        prRed("Obviously, any semantic and syntax errors will cause crash on the server side!")
+                        # print("Enter your command: ")
+                        command = input("Enter your command: ")
+                        clientsocket.sendall(str.encode(command))
+
+                    if int(Enter) == 2:
+                        prCyan("Download is going to start ... ")
+                        clientsocket.sendall(str.encode("Nothing"))
+                        response1 = clientsocket.recv(2048)
+                        response1 = response1.decode("UTF-8")
+                        print("response is: ", response1)
+
+
+
+
+
+                else:
+                    prRed("you are not admin and this item not available for you")
 
 
         elif int(Input) == 4:
