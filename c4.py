@@ -216,8 +216,9 @@ if response == "yes":
         # print(type(Input))
         while ( not Input.isnumeric()):
             Input = input("Please enter a number! : ")
-
+        # print("input is: ", int(Input))
         # print("input is: ", Input)
+
         if int(Input) == 1:
             # print("Check33333")
             # print("??????????????????")
@@ -232,7 +233,7 @@ if response == "yes":
                 else:
                     print("     ",item)
                 i += 1
-        prYellow("     =================================================== ")
+            prYellow("     =================================================== ")
         if int(Input) == 2:
             clientsocket.send(str.encode(Input))
             response = clientsocket.recv(1024)
@@ -248,15 +249,14 @@ if response == "yes":
             prRed(response)
             prYellow("     =================================================== ")
 
-            # print("Check222222")
-
-
-
-
         if int(Input) == 3:
+            print("1")
             clientsocket.send(str.encode(Input))
+            print("1")
             response = clientsocket.recv(1024)
+            print("1")
             response = response.decode("UTF-8")
+            print("response is: ", response)
             if "@" in response:
                 responses = response.split('@')
                 index = 1
@@ -280,13 +280,14 @@ if response == "yes":
                 response = clientsocket.recv(1024)
                 response = response.decode("UTF-8")
                 prRed(response)
-                prYellow("     =================================================== ")
+                prYellow("     ======================/============================= ")
 
 
 
 
             else:
                 prRed(response)
+                clientsocket.send(str.encode("END"))
 
 
 

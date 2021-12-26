@@ -287,6 +287,7 @@ if response == "yes":
 
             else:
                 prRed(response)
+                clientsocket.send(str.encode("END"))
 
 
 

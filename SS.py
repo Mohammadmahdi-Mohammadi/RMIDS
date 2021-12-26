@@ -297,10 +297,14 @@ def client_thread(connection):
 
                 return_book = connection.recv(2048)
                 return_book = return_book.decode("UTF-8")
-                index = int(return_book)
-                message = library.Student_and_library_array_handler(index , security_array[login_check])
-                print(message)
-                connection.sendall(str.encode(message))
+
+                if (return_book != "END"):
+                    index = int(return_book)
+                    message = library.Student_and_library_array_handler(index , security_array[login_check])
+                    print(message)
+                    connection.sendall(str.encode(message))
+
+
 
 
 
