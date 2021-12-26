@@ -167,6 +167,9 @@ class Student:
     def get_value(self):
         return self.name,self.password
 
+    def get_value_to_migrate(self):
+        return self.name + "$" + self.password
+
     def get_array(self):
         return self.Borrowed_list
 
@@ -315,13 +318,34 @@ def client_thread(connection):
                 print("admin_choose: ", admin_choose)
                 connection.sendall(str.encode("possible"))
                 if int(admin_choose) == 1:
-                    print("1111111111111")
-                    print("1111111111111")
+                    # print("1111111111111")
+                    # print("1111111111111")
                     admin_command = connection.recv(2048)
                     # print("admin command: "  admin_command)
-                    admin_command = admin_command   .decode("UTF-8")
+                    admin_command = admin_command.decode("UTF-8")
                     print("admin command is: ", admin_command)
                     exec(admin_command)
+
+
+                if int(admin_choose) == 2:
+
+                    admin_command = connection.recv(2048)
+                    admin_command = admin_command.decode("UTF-8")
+                    print("admin_command: ", admin_command)
+                    pm = str(len(security_array))
+                    pm_attach = "nothing"
+                    for student in security_array:
+                        pm = pm + "@"  + student.get_value_to_migrate()
+                        for book in student.get_array():
+                            pm_attach = pm_attach + "$" + book
+                        pm_attach = pm_attach + "@"
+                    connection.send(str.encode(pm))
+                    print("pm is: ", pm)
+
+
+
+
+
 
 
 

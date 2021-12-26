@@ -311,7 +311,7 @@ if response == "yes":
                 prRed(response)
                 clientsocket.send(str.encode("END"))
 
-        elif int(Input) ==5:
+        elif int(Input) == 5:
             clientsocket.send(str.encode(Input))
             if admin_check:
                 prRed("administrator attention: ")
@@ -332,8 +332,16 @@ if response == "yes":
                     prRed("Obviously, any semantic and syntax errors will cause crash on the server side!")
                     # print("Enter your command: ")
                     command = input("Enter your command: ")
-
                     clientsocket.sendall(str.encode(command))
+
+                if int(Enter) == 2:
+                    prCyan("Download is going to start ... ")
+                    clientsocket.sendall(str.encode("Nothing"))
+                    response1 = clientsocket.recv(2048)
+                    response1 = response1.decode("UTF-8")
+                    print("response is: ", response1)
+
+
 
 
 
