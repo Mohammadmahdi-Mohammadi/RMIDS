@@ -47,12 +47,23 @@ def validateLogin(username, password):
     # print("username entered :", username.get())
     # print("password entered :", password.get(),"\n","we are going to verify your account ... ")
     prYellow(   "we are going to verify your account ... ")
-    time.sleep(1)
-    prRed("...")
-    time.sleep(1)
-    prRed("...")
-    time.sleep(1)
-    prRed("...")
+    # A List of Items
+    items = list(range(0, 300))
+    l = len(items)
+
+    # Initial call to print 0% progress
+    printProgressBar(0, l, prefix='Progress:', suffix='Complete', length=30)
+    for i, item in enumerate(items):
+        # Do stuff...
+        time.sleep(0.0001999)
+        # Update Progress Bar
+        printProgressBar(i + 1, l, prefix='Progress:', suffix='Complete', length=30)
+    # time.sleep(1)
+    # prRed("...")
+    # time.sleep(1)
+    # prRed("...")
+    # time.sleep(1)
+    # prRed("...")
     # time.sleep(1)
     # print("we are going to verify your account")
 
@@ -114,7 +125,7 @@ clientsocket.send(str.encode(check))
 response = clientsocket.recv(1024)
 response = response.decode("utf-8")
 if response == "yes":
-    prGreen("authentication was successful :)")
+    prGreen("         Authentication was successful :)")
     print("you're currently login as:    ", __user)
     prYellow("""                       ======LIBRARY MENU=======
                       1. Display all available books
@@ -214,6 +225,6 @@ if response == "yes":
         # response = clientsocket.recv(1024)
 
 else:
-    prRed("authentication was unsuccessful :(")
+    prRed("         Authentication was unsuccessful :(")
 
 
