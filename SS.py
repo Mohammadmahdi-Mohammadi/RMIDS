@@ -109,6 +109,7 @@ class Library:
         print("current user info: ",student.get_value())
         # pm = str(len(student_array)) + "@"
         pm= "List of books you have borrowed before:@==================================================== "
+        print("length of array is : ", len(student.get_array()))
         if len(student.get_array()) > 0:
             index = 1
             for book in student.get_array():
@@ -292,7 +293,7 @@ def client_thread(connection):
                 message = library.addBook(security_array[login_check])
                 print("message is: " , message)
                 connection.sendall(str.encode(message))
-
+                print("////////////////////")
 
                 return_book = connection.recv(2048)
                 return_book = return_book.decode("UTF-8")
