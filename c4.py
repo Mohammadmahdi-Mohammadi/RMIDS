@@ -250,6 +250,9 @@ if response == "yes":
 
             # print("Check222222")
 
+
+
+
         if int(Input) == 3:
             clientsocket.send(str.encode(Input))
             response = clientsocket.recv(1024)
@@ -279,8 +282,13 @@ if response == "yes":
                 prRed(response)
                 prYellow("     =================================================== ")
 
+
+
+
             else:
                 prRed(response)
+
+
 
 
         if int(Input) == 4:
@@ -293,3 +301,5 @@ if response == "yes":
 
 else:
     prRed("         Authentication was unsuccessful :(")
+
+
