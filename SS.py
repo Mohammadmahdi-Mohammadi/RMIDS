@@ -304,12 +304,10 @@ def client_thread(connection):
                 print(message)
                 connection.sendall(str.encode(message))
 
-
-
-
-
-
             elif choice == 4:
+                global ThreadCount
+                if ThreadCount > 0:
+                    ThreadCount -= 1
                 connection.close()
             # with stdoutIO() as s:
             #     exec(data)
