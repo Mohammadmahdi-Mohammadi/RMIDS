@@ -151,11 +151,18 @@ def validateLogin(username, password):
     tkWindow.destroy()
     return
 
+# ------------------------------------------------------------------------------
+#Network config
+
 clientsocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 host = socket.gethostname()
 port = 10000
 
+# ----------------------------------------------------------------------------
+# A try block allows you to handle an expected error. The except block should only
+# catch exceptions you are prepared to handle. If you handle an unexpected error, your code
+# may do the wrong thing and hide bugs.
 # print("waiting for connections")
 try:
     clientsocket.connect((host,port))
@@ -164,6 +171,8 @@ except:
 # except socket.error as e:
 #     print(str(e))
 
+# --------------------------------------------------------------
+# Opening
 Response = clientsocket.recv(1024)
 prGreen(Response.decode("utf-8"))
 
@@ -194,11 +203,15 @@ loginButton = Button(tkWindow, text="Login", command=validateLogin).grid(row=3, 
 tkWindow.mainloop()
 
 # --------------------------------------------------------------
-
+# sending USER&PASS to server for login
 check = __user + " " + __pass
 clientsocket.send(str.encode(check))
+
+# waiting for Authentication
 response = clientsocket.recv(1024)
 response = response.decode("utf-8")
+
+# response values is coming from server and will decide the validitaion of user
 if response == "yes":
     prGreen("         Authentication was successful :)")
     print("you're currently login as -----> ", __user)
