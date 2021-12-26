@@ -203,7 +203,7 @@ loginButton = Button(tkWindow, text="Login", command=validateLogin).grid(row=3, 
 tkWindow.mainloop()
 
 # --------------------------------------------------------------
-# sending USER&PASS to server for login
+# sending USER&PASS to server for login 
 check = __user + " " + __pass
 clientsocket.send(str.encode(check))
 
