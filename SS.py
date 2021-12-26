@@ -2,7 +2,32 @@
 # Created by Mohammadmahdi_Mohammadi on 25/12/21.
 # available on github.com/Mohammadmahdi-Mohammadi
 
-# https://stackoverflow.com/questions/3906232/python-get-the-print-output-in-an-exec-statement
+
+# -------------------------------------------------------------------------------------------
+# copyright:https://stackoverflow.com/questions/3173320/text-progress-bar-in-terminal-with-block-characters
+# Print iterations progress
+def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, length = 100, fill = '█', printEnd = "\r"):
+    """
+    Call in a loop to create terminal progress bar
+    @params:
+        iteration   - Required  : current iteration (Int)
+        total       - Required  : total iterations (Int)
+        prefix      - Optional  : prefix string (Str)
+        suffix      - Optional  : suffix string (Str)
+        decimals    - Optional  : positive number of decimals in percent complete (Int)
+        length      - Optional  : character length of bar (Int)
+        fill        - Optional  : bar fill character (Str)
+        printEnd    - Optional  : end character (e.g. "\r", "\r\n") (Str)
+    """
+    percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
+    filledLength = int(length * iteration // total)
+    bar = fill * filledLength + '-' * (length - filledLength)
+    print(f'\r{prefix} |{bar}| {percent}% {suffix}', end = printEnd)
+    # Print New Line on Complete
+    if iteration == total:
+        print()
+# --------------------------------------------------------------
+# copyright: https://stackoverflow.com/questions/3906232/python-get-the-print-output-in-an-exec-statement
 # Since Python 3.4 there is a solution is the stdlib:
 import time
 import sys
@@ -23,6 +48,7 @@ def stdoutIO(stdout=None):
     #
     # print("out:", s.getvalue())
 
+# ---------------------------------------------------------------
 def prRed(skk): print("\033[91m {}\033[00m" .format(skk))
 def prGreen(skk): print("\033[92m {}\033[00m" .format(skk))
 def prYellow(skk): print("\033[93m {}\033[00m" .format(skk))
@@ -186,13 +212,13 @@ member1 = Student("ali","1985")
 member2 = Student("amir" , "1998")
 member3 = Student("hamid" , "2000")
 security_array = [member1 , member2, member3]
-
+# static security implementation
 
 # _____________________________________________________________
 
 prYellow("Waiting for connection an client .... ")
 def client_thread(connection):
-    print("??2??")
+    # print("??2??")
     connection.send(str.encode("Welcome to the Library\n please Enter your information"))
     check = connection.recv(2048)
     check = check.decode("UTF-8")
@@ -211,14 +237,14 @@ def client_thread(connection):
         connection.sendall(str.encode("yes"))
         while True:
             # time.sleep(20)
-            print("Check222222")
+            # print("Check222222")
             # print("Array value is: ", r_array[0])
             data = connection.recv(2048)
-            print("Check33333")
+            # print("Check33333")
             # print("recievd method:  ", data.decode("UTF-8"))
             data = data.decode("UTF-8")
             choice = int(data)
-            print("Check4444")
+            # print("Check4444")
             print("choose is :" , choice)
 
 
