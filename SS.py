@@ -104,7 +104,8 @@ class Library:
             send_data = send_data +"@ " + book[0] + " | " + book[1]
         return send_data
 
-    @classmethod
+    # @classmethod
+    # no usage!
     def currentbooks(self):
         value = ""
         for x in self.availablebooks:
@@ -361,7 +362,7 @@ def client_thread(connection):
                     admin_command3 = admin_command3.decode("UTF-8")
                     print("cheeeeck")
                     if admin_command3 == "done":
-                        fault = Library.currentbooks()
+                        fault = library.displayAvailablebooks()
                         connection.send(str.encode(fault))
                     else:
                         print(admin_command3)
