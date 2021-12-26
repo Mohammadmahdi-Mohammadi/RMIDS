@@ -119,3 +119,4 @@ for x in range(1 , 4):
     list = pms[x].split("$")
     print(list[0])
     print(list[1])
+
