@@ -356,9 +356,13 @@ if response == "yes":
 
                         clientsocket.sendall(str.encode("done"))
                         print("cheeeeck")
-                        response1 = clientsocket.recv(2048)
-                        response1 = response1.decode("UTF-8")
-                        print("attach is: ", response1)
+
+                        # pm attach
+                        response2 = clientsocket.recv(2048)
+                        response2 = response2.decode("UTF-8")
+                        print("attach is: ", response2)
+
+                        members = response1.split("@")
 
 
 
