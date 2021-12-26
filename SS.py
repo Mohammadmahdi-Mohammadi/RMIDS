@@ -135,6 +135,7 @@ class Library:
 
     def Student_and_library_array_handler(self, index , student):
         print ("index is: ", index)
+        print("inside of index: ",student.get_array_value(index))
         # student_array = student.get_array()
         new_book, new_author = student.get_array_value(index)
         self.availablebooks.append((new_book,new_author))
@@ -285,6 +286,8 @@ def client_thread(connection):
                 # length = len(student.get_array())
                 # length_ = str(length)
                 # connection.sendall(str.encode(length_))
+                print("Login_check: ", login_check)
+                print("info: ", security_array[login_check].get_value())
 
                 message = library.addBook(security_array[login_check])
                 print("message is: " , message)
