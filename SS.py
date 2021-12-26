@@ -19,6 +19,7 @@
 # RPC belongs to the remote call at the function level, and it mostly transmits data through HTTP
 # in the form of XML, JSON, serialized data, etc. Here's an example of xml-rpc in python.
 # Ref: ofstack.com/
+
 # -------------------------------------------------------------------------------------------
 # copyright:https://stackoverflow.com/questions/3173320/text-progress-bar-in-terminal-with-block-characters
 # Print iterations progress
