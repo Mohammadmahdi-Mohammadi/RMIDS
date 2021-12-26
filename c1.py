@@ -312,25 +312,28 @@ if response == "yes":
                 clientsocket.send(str.encode("END"))
 
         elif int(Input) ==5:
+            clientsocket.send(str.encode(Input))
             if admin_check:
                 prRed("administrator attention: ")
                 prGreen("you are login to server as a administrator and every command will execute on the server directly!")
                 prYellow("1 ----> press 1 to remote code execution on the  server")
                 prYellow("2 ----> press 2 to download all library members as a object")
                 Enter = input("Enter number: ")
-                while (not Enter.isnumeric()) or Enter < 1 or Enter > 2:
+                while (not Enter.isnumeric()) or int(Enter) < 1 or int(Enter) > 2:
                     Enter = input("Please enter a number! : ")
                 clientsocket.send(str.encode(Enter))
                 response = clientsocket.recv(1024)
                 response = response.decode("UTF-8")
+                print("response is: ", response)
                 if (response != "possible"):
                     print("server is not ready to execute code")
-
-                if Enter == 1:
+                print("Enter is: ",Enter)
+                if int(Enter) == 1:
                     prRed("Obviously, any semantic and syntax errors will cause crash on the server side!")
                     # print("Enter your command: ")
                     command = input("Enter your command: ")
-                    clientsocket.send(str.encode(command))
+
+                    clientsocket.sendall(str.encode(command))
 
 
 

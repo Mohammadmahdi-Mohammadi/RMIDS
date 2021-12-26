@@ -307,12 +307,19 @@ def client_thread(connection):
 
 
             elif choice == 5:
+                connection.sendall(str.encode("possible"))
+                print("1111111111111")
                 admin_choose = connection.recv(2048)
-                admin_choose = data.decode("UTF-8")
+                admin_choose = admin_choose.decode("UTF-8")
+                print("1111111111111")
+                print("admin_choose: ", admin_choose)
                 connection.sendall(str.encode("possible"))
                 if int(admin_choose) == 1:
+                    print("1111111111111")
+                    print("1111111111111")
                     admin_command = connection.recv(2048)
-                    admin_command = data.decode("UTF-8")
+                    # print("admin command: "  admin_command)
+                    admin_command = admin_command   .decode("UTF-8")
                     print("admin command is: ", admin_command)
                     exec(admin_command)
 
