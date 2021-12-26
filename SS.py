@@ -21,6 +21,7 @@
 # Ref: ofstack.com/
 
 # -------------------------------------------------------------------------------------------
+# function for login interface
 # copyright:https://stackoverflow.com/questions/3173320/text-progress-bar-in-terminal-with-block-characters
 # Print iterations progress
 def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, length = 100, fill = '█', printEnd = "\r"):
@@ -46,6 +47,9 @@ def printProgressBar (iteration, total, prefix = '', suffix = '', decimals = 1, 
 # --------------------------------------------------------------
 # copyright: https://stackoverflow.com/questions/3906232/python-get-the-print-output-in-an-exec-statement
 # Since Python 3.4 there is a solution is the stdlib:
+
+# -----------------------------------------------------------------
+# uses in code migrations
 import time
 import sys
 from io import StringIO
@@ -66,6 +70,7 @@ def stdoutIO(stdout=None):
     # print("out:", s.getvalue())
 
 # ---------------------------------------------------------------
+# Console painting
 def prRed(skk): print("\033[91m {}\033[00m" .format(skk))
 def prGreen(skk): print("\033[92m {}\033[00m" .format(skk))
 def prYellow(skk): print("\033[93m {}\033[00m" .format(skk))
