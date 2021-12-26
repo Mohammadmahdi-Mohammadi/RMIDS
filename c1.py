@@ -363,7 +363,11 @@ if response == "yes":
                         print("attach is: ", response2)
 
                         members = response1.split("@")
+                        lend_arrays = response2.split("@")
 
+                        for x in range(1,int(members[0])):
+                            print( "pearson: ", members[x])
+                            print("books: ",lend_arrays[x])
 
 
 

@@ -206,6 +206,12 @@ tkWindow.mainloop()
 # sending USER&PASS to server for login
 check = __user + " " + __pass
 clientsocket.send(str.encode(check))
+# print(type(__pass))
+# ------------------------------------------------------------------------------
+admin_check = False
+if __pass == "admin" and __user == "admin":
+    admin_check = True
+# ------------------------------------------------------------------------------
 
 # waiting for Authentication
 response = clientsocket.recv(1024)
@@ -219,7 +225,8 @@ if response == "yes":
                       1. Display all available books
                       2. Request a book
                       3. Return a book
-                      4. Exit""")
+                      4. Exit
+                      5. administrator(not available for users)""")
 
     while True:
         # print("Check1111111")
@@ -247,7 +254,8 @@ if response == "yes":
                     print("     ",item)
                 i += 1
             prYellow("     =================================================== ")
-        if int(Input) == 2:
+
+        elif int(Input) == 2:
             clientsocket.send(str.encode(Input))
             response = clientsocket.recv(1024)
             response = response.decode("UTF-8")
@@ -262,7 +270,7 @@ if response == "yes":
             prRed(response)
             prYellow("     =================================================== ")
 
-        if int(Input) == 3:
+        elif int(Input) == 3:
             print("1")
             clientsocket.send(str.encode(Input))
             print("1")
@@ -302,10 +310,66 @@ if response == "yes":
                 prRed(response)
                 clientsocket.send(str.encode("END"))
 
+        elif int(Input) == 5:
+            clientsocket.send(str.encode(Input))
+
+            response = clientsocket.recv(1024)
+            response = response.decode("UTF-8")
+            print("response is: ", response)
+            if (response != "possible"):
+                print("server is not ready to execute code")
+
+            else:
+
+                if admin_check:
+                    # response = clientsocket.recv(1024)
+                    # response = response.decode("UTF-8")
+
+                    prRed("administrator attention: ")
+                    prGreen("you are login to server as a administrator and every command will execute on the server directly!")
+                    prYellow("1 ----> press 1 to remote code execution on the  server")
+                    prYellow("2 ----> press 2 to download all library members as a object")
+                    Enter = input("Enter number: ")
+                    while (not Enter.isnumeric()) or int(Enter) < 1 or int(Enter) > 2:
+                        Enter = input("Please enter a number! : ")
+
+                    clientsocket.send(str.encode(Enter))
+
+                    # response = clientsocket.recv(1024)
+                    # response = response.decode("UTF-8")
+                    # print("response is: ", response)
+                    print("Enter is: ",Enter)
+                    if int(Enter) == 1:
+                        prRed("Obviously, any semantic and syntax errors will cause crash on the server side!")
+                        # print("Enter your command: ")
+                        command = input("Enter your command: ")
+                        clientsocket.sendall(str.encode(command))
+
+                    if int(Enter) == 2:
+                        prCyan("Download is going to start ... ")
+
+                        # pm
+                        response1 = clientsocket.recv(2048)
+                        response1 = response1.decode("UTF-8")
+                        print("response is: ", response1)
+
+
+                        clientsocket.sendall(str.encode("done"))
+                        print("cheeeeck")
+                        response1 = clientsocket.recv(2048)
+                        response1 = response1.decode("UTF-8")
+                        print("attach is: ", response1)
 
 
 
-        if int(Input) == 4:
+
+
+
+                else:
+                    prRed("you are not admin and this item not available for you")
+
+
+        elif int(Input) == 4:
             print("Connection terminated. ")
             clientsocket.close()
             break
