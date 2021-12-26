@@ -362,12 +362,12 @@ if response == "yes":
                         response2 = response2.decode("UTF-8")
                         print("attach is: ", response2)
 
-                        members = response1.split("@")
-                        lend_arrays = response2.split("@")
-
-                        for x in range(1,int(members[0])):
-                            print( "pearson: ", members[x])
-                            print("books: ",lend_arrays[x])
+                        # members = response1.split("@")
+                        # lend_arrays = response2.split("@")
+                        #
+                        # for x in range(1,int(members[0])):
+                        #     print( "pearson: ", members[x])
+                        #     print("books: ",lend_arrays[x])
 
 
 

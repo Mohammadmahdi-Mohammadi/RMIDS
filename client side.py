@@ -109,7 +109,13 @@
 # attach is:  nothing$Computer Architecture: A Quantitative ApproachJohn Hennessy$Fundamentals of Superscalar ProcessorsJohn Shen@$The Soul of a New MachineTracy Kidder@$Computer Networking: A Top Down ApproachJames Kurose@@
 
 pm = "4@ali$1985@amir$1998@hamid$2000@admin$admin"
+attach = "nothing$Computer Architecture: A Quantitative ApproachJohn Hennessy$Fundamentals of Superscalar ProcessorsJohn Shen@$The Soul of a New MachineTracy Kidder@$Computer Networking: A Top Down ApproachJames Kurose@@"
 pms = pm.split("@")
 print(pms)
+attachs = attach.split("@")
+print(attachs)
+
 for x in range(1 , 4):
-	
+    list = pms[x].split("$")
+    print(list[0])
+    print(list[1])
