@@ -3,6 +3,14 @@
 # available on github.com/Mohammadmahdi-Mohammadi/RMIDS
 # --------------------------------------------------------------
 
+# Server side :
+#              Server-side refers to operations that are performed by the server
+#              in a client–server relationship in computer networking. Typically,
+#              a server is a computer program, such as a web server, that runs on
+#              a remote server, reachable from a user's local computer or workstation.
+
+# --------------------------------------------------------------
+
 #Remote invocation makes the objects and methods of the remote server call
 # in much the same way as the local objects and methods, because we hide them
 # all by network programming. Remote invocation is the foundation of distributed systems.
@@ -235,7 +243,17 @@ member3 = Student("hamid" , "2000")
 admin = Student("admin" , "admin")
 security_array = [member1 , member2, member3,admin]
 # static security implementation
-prYellow("Waiting for connection an client .... ")
+
+
+items = list(range(0, 300))
+l = len(items)
+printProgressBar(0, l, prefix='Progress:', suffix='Complete', length=30)
+for i, item in enumerate(items):
+    # Do stuff...
+    time.sleep(0.009)
+    # Update Progress Bar
+    printProgressBar(i + 1, l, prefix='Progress:', suffix='Complete', length=30)
+prYellow("Server is ready ---- > Waiting for clients .... ")
 
 # _____________________________________________________________
 
@@ -319,11 +337,9 @@ def client_thread(connection):
 
             elif choice == 5:
                 connection.sendall(str.encode("possible"))
-                print("1111111111111")
 
                 admin_choose = connection.recv(2048)
                 admin_choose = admin_choose.decode("UTF-8")
-                print("1111111111111")
                 print("admin_choose: ", admin_choose)
                 # connection.sendall(str.encode("possible"))
 
@@ -342,7 +358,6 @@ def client_thread(connection):
                     # admin_command = connection.recv(2048)
                     # admin_command = admin_command.decode("UTF-8")
 
-                    print("helloo")
                     # print("admin_command: ", admin_command)
                     pm = str(len(security_array))
                     pm_attach = "nothing"
@@ -356,16 +371,14 @@ def client_thread(connection):
 
                     connection.send(str.encode(pm))
                     print("pm is: ", pm)
-                    print("cheeeeck")
 
                     admin_command3 = connection.recv(2048)
                     admin_command3 = admin_command3.decode("UTF-8")
-                    print("cheeeeck")
                     if admin_command3 == "done":
                         fault = library.displayAvailablebooks()
                         connection.send(str.encode(fault))
 
-                        admin_command3 = connection.recv(2048)
+                        # admin_command3 = connection.recv(2048)
 
                     else:
                         print(admin_command3)
@@ -439,3 +452,4 @@ while True:
     print("Number of accepted clients: " + str(ThreadCount))
     prRed("\n==============================================================")
 socketserver.close()
+# print("remote admin needs the number of current online users:",ThreadCount)

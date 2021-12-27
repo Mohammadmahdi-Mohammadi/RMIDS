@@ -3,6 +3,13 @@
 # available on github.com/Mohammadmahdi-Mohammadi/RMIDS
 # --------------------------------------------------------------
 
+# Client side:
+#            Client-side refers to a specific part of client/server architecture,
+#            which is a network structure distinguishing clients or computers ordering
+#            information from servers, hardware pieces that deliver that information and
+#            process requests.
+# --------------------------------------------------------------
+
 #Remote invocation makes the objects and methods of the remote server call
 # in much the same way as the local objects and methods, because we hide them
 # all by network programming. Remote invocation is the foundation of distributed systems.
@@ -72,6 +79,8 @@ def stdoutIO(stdout=None):
     #
     # print("out:", s.getvalue())
 
+def Diff(li1, li2):
+    return list(set(li1) - set(li2)) + list(set(li2) - set(li1))
 
 # --------------------------------------------------------------
 
@@ -117,6 +126,25 @@ def prLightGray(skk): print("\033[97m {}\033[00m" .format(skk))
 def prBlack(skk): print("\033[98m {}\033[00m" .format(skk))
 
 # ------------------------------------------------------------------------------
+
+
+class Student:
+    def __init__(self, name , password):
+        self.name = name;
+        self.password = password;
+        self.Borrowed_list = []
+
+    def get_value(self):
+        return self.name,self.password
+
+all_books_in_library = ['none', ' The Soul of a New Machine | Tracy Kidder', ' Software and Hardware Problems and Solutions | Simon Monk', ' Fundamentals of Superscalar Processors | John Shen', ' Structured Computer Organization | Andrew Tanenbaum', ' Computer Networking: A Top Down Approach | James Kurose', ' Computer Architecture: A Quantitative Approach | John Hennessy']
+
+
+
+
+
+
+
 
 __user = ""
 __pass = ""
@@ -339,11 +367,18 @@ if response == "yes":
                     # response = response.decode("UTF-8")
                     # print("response is: ", response)
                     print("Enter is: ",Enter)
+
+
+
                     if int(Enter) == 1:
                         prRed("Obviously, any semantic and syntax errors will cause crash on the server side!")
                         # print("Enter your command: ")
                         command = input("Enter your command: ")
                         clientsocket.sendall(str.encode(command))
+
+
+
+
 
                     if int(Enter) == 2:
                         prCyan("Download is going to start ... ")
@@ -353,28 +388,66 @@ if response == "yes":
                         response1 = response1.decode("UTF-8")
                         print("response is: ", response1)
 
-
                         clientsocket.sendall(str.encode("done"))
-                        print("cheeeeck")
 
                         # pm attach
                         response2 = clientsocket.recv(2048)
                         response2 = response2.decode("UTF-8")
                         print("attach is: ", response2)
 
-                        members = response1.split("@")
-                        lend_arrays = response2.split("@")
+                        # print("cheeeeck")
 
-                        for x in range(1,int(members[0])):
-                            print( "pearson: ", members[x])
-                            print("books: ",lend_arrays[x])
+                        stu1 = Student("first","first")
+                        stu2 = Student("second","second")
+
+                        final_memebers = [stu1,stu2]
+
+                        # print("cheeeeck1")
+
+                        pms = response1.split("@")
+                        for i in range(1,len(pms)  ):
+                            # print("cheeeeck3")
+                            temp = pms[i].split("$")
+                            # print("temp is: ", temp)
+
+                            temp_name = temp[0]
+                            temp_pass = temp[1]
+                            student = Student(temp_name,temp_pass)
+                            final_memebers.append(student)
+                        # print("cheeeeck4")
+                        final_memebers.pop(0)
+                        final_memebers.pop(0)
+                        # for i in range(0, len(final_memebers)):
+                        #     print(i,"index is: ", final_memebers[i].get_value())
+                        # print("cheeeeck5")
+                        for i in range(0, len(final_memebers)):
+                            print(i,"index is: ", final_memebers[i].get_value())
+                        print(final_memebers)
+                        # print("cheeeeck")
+
+                        final_list = ["none"]
+                        currentbooks = response2.split("@")
+                        for i in range(0, len(currentbooks)):
+                            if i != 0 and i != 1:
+                                final_list.append(currentbooks[i])
+
+                        prGreen("Library status report:")
+                        prGreen("available books:")
+                        for i in range(1,len(final_list)):
+                            prGreen (final_list[i])
+                        prRed("not available books: ")
+                        prRed(Diff(final_list, all_books_in_library))
+
+
+
 
 
 
 
 
                 else:
-                    prRed("you are not admin and this item not available for you")
+                    prRed("you are not admin and this item not available for you, please login with admin account :\ ")
+                    break
 
 
         elif int(Input) == 4:
