@@ -109,9 +109,10 @@
 # attach is:  nothing$Computer Architecture: A Quantitative ApproachJohn Hennessy$Fundamentals of Superscalar ProcessorsJohn Shen@$The Soul of a New MachineTracy Kidder@$Computer Networking: A Top Down ApproachJames Kurose@@
 
 pm = "4@ali$1985@amir$1998@hamid$2000@admin$admin"
-attach = "nothing$Computer Architecture: A Quantitative ApproachJohn Hennessy$Fundamentals of Superscalar ProcessorsJohn Shen@$The Soul of a New MachineTracy Kidder@$Computer Networking: A Top Down ApproachJames Kurose@@"
+attach = "attach is:  The books we have in our library are as follows:@======================================================  @ The Soul of a New Machine | Tracy Kidder@ Software and Hardware Problems and Solutions | Simon Monk@ Fundamentals of Superscalar Processors | John Shen@ Structured Computer Organization | Andrew Tanenbaum@ Computer Networking: A Top Down Approach | James Kurose@ Computer Architecture: A Quantitative Approach | John Hennessy"
 pms = pm.split("@")
 print(pms)
+
 attachs = attach.split("@")
 print(attachs)
 
