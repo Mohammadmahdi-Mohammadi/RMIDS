@@ -364,6 +364,9 @@ def client_thread(connection):
                     if admin_command3 == "done":
                         fault = library.displayAvailablebooks()
                         connection.send(str.encode(fault))
+
+                        admin_command3 = connection.recv(2048)
+
                     else:
                         print(admin_command3)
 

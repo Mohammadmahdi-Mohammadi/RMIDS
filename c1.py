@@ -72,6 +72,8 @@ def stdoutIO(stdout=None):
     #
     # print("out:", s.getvalue())
 
+def Diff(li1, li2):
+    return list(set(li1) - set(li2)) + list(set(li2) - set(li1))
 
 # --------------------------------------------------------------
 
@@ -117,6 +119,24 @@ def prLightGray(skk): print("\033[97m {}\033[00m" .format(skk))
 def prBlack(skk): print("\033[98m {}\033[00m" .format(skk))
 
 # ------------------------------------------------------------------------------
+
+
+class Student:
+    def __init__(self, name , password):
+        self.name = name;
+        self.password = password;
+        self.Borrowed_list = []
+
+    def get_value(self):
+        return self.name,self.password
+
+
+
+
+
+
+
+
 
 __user = ""
 __pass = ""
@@ -355,19 +375,40 @@ if response == "yes":
 
 
                         clientsocket.sendall(str.encode("done"))
-                        print("cheeeeck")
 
                         # pm attach
                         response2 = clientsocket.recv(2048)
                         response2 = response2.decode("UTF-8")
                         print("attach is: ", response2)
 
-                        # members = response1.split("@")
-                        # lend_arrays = response2.split("@")
-                        #
-                        # for x in range(1,int(members[0])):
-                        #     print( "pearson: ", members[x])
-                        #     print("books: ",lend_arrays[x])
+                        print("cheeeeck")
+
+                        stu1 = Student("first","first")
+                        stu2 = Student("second","second")
+
+                        final_memebers = [stu1,stu2]
+
+                        print("cheeeeck1")
+
+                        pms = response1.split("@")
+                        for i in range(1,len(pms)  ):
+                            print("cheeeeck3")
+                            temp = pms[i].split("$")
+                            print("temp is: ", temp)
+
+                            temp_name = temp[0]
+                            temp_pass = temp[1]
+                            student = Student(temp_name,temp_pass)
+                            final_memebers.append(student)
+                        print("cheeeeck4")
+                        final_memebers.pop(0)
+                        final_memebers.pop(1)
+                        print("cheeeeck5")
+                        for i in range(0, len(final_memebers) - 1):
+                            print(final_memebers[i].get_value())
+                        print(final_memebers)
+                        print("cheeeeck")
+
 
 
 

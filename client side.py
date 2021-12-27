@@ -107,196 +107,21 @@
 
 # response is:  4@ali$1985@amir$1998@hamid$2000@admin$admin
 # attach is:  nothing$Computer Architecture: A Quantitative ApproachJohn Hennessy$Fundamentals of Superscalar ProcessorsJohn Shen@$The Soul of a New MachineTracy Kidder@$Computer Networking: A Top Down ApproachJames Kurose@@
-
+def Diff(li1, li2):
+    return list(set(li1) - set(li2)) + list(set(li2) - set(li1))
 pm = "4@ali$1985@amir$1998@hamid$2000@admin$admin"
-attach = "attach is:  The books we have in our library are as follows:@======================================================  @ The Soul of a New Machine | Tracy Kidder@ Software and Hardware Problems and Solutions | Simon Monk@ Fundamentals of Superscalar Processors | John Shen@ Structured Computer Organization | Andrew Tanenbaum@ Computer Networking: A Top Down Approach | James Kurose@ Computer Architecture: A Quantitative Approach | John Hennessy"
+attach = "The books we have in our library are as follows:@======================================================  @ The Soul of a New Machine | Tracy Kidder@ Software and Hardware Problems and Solutions | Simon Monk@ Fundamentals of Superscalar Processors | John Shen@ Structured Computer Organization | Andrew Tanenbaum@ Computer Networking: A Top Down Approach | James Kurose@ Computer Architecture: A Quantitative Approach | John Hennessy"
 pms = pm.split("@")
 print(pms)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-attachs = attach.split("@")
-print(attachs)
-
-for x in range(1 , 4):
-    list = pms[x].split("$")
-    print(list[0])
-    print(list[1])
-
+currentbooks = attach.split("@")
+print(currentbooks)
+final_list = ["none"]
+for i in range(0,len(currentbooks)):
+    if i != 0 and i != 1:
+        final_list.append(currentbooks[i])
+print("books:" , final_list)
+all_books_in_library = ['none', ' The Soul of a New Machine | Tracy Kidder', ' Software and Hardware Problems and Solutions | Simon Monk', ' Fundamentals of Superscalar Processors | John Shen', ' Structured Computer Organization | Andrew Tanenbaum', ' Computer Networking: A Top Down Approach | James Kurose', ' Computer Architecture: A Quantitative Approach | John Hennessy']
+print("result", Diff(final_list , all_books_in_library))
 
 
 
