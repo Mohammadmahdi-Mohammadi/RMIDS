@@ -75,7 +75,7 @@ def stdoutIO(stdout=None):
     sys.stdout = old
     #
     # with stdoutIO() as s:
-    #     exec(data)    
+    #     exec(data)
     #
     # print("out:", s.getvalue())
 
@@ -161,7 +161,7 @@ def validateLogin(username, password):
     printProgressBar(0, l, prefix='Progress:', suffix='Complete', length=30)
     for i, item in enumerate(items):
         # Do stuff...
-        time.sleep(0.001999)
+        time.sleep(0.01)
         # Update Progress Bar
         printProgressBar(i + 1, l, prefix='Progress:', suffix='Complete', length=30)
     # time.sleep(1)
