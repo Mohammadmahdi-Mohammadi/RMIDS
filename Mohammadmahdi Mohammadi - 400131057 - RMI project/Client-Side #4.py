@@ -137,7 +137,13 @@ class Student:
     def get_value(self):
         return self.name,self.password
 
+
+
+
 all_books_in_library = ['none', ' The Soul of a New Machine | Tracy Kidder', ' Software and Hardware Problems and Solutions | Simon Monk', ' Fundamentals of Superscalar Processors | John Shen', ' Structured Computer Organization | Andrew Tanenbaum', ' Computer Networking: A Top Down Approach | James Kurose', ' Computer Architecture: A Quantitative Approach | John Hennessy']
+
+
+
 __user = ""
 __pass = ""
 def validateLogin(username, password):
@@ -423,6 +429,13 @@ if response == "yes":
                             prGreen (final_list[i])
                         prRed("not available books: ")
                         prRed(Diff(final_list, all_books_in_library))
+
+
+
+
+
+
+
 
                 else:
                     prRed("you are not admin and this item not available for you, please login with admin account :\ ")

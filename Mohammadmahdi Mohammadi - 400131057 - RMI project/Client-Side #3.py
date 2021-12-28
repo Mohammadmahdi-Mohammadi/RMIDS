@@ -137,7 +137,13 @@ class Student:
     def get_value(self):
         return self.name,self.password
 
+
+
+
 all_books_in_library = ['none', ' The Soul of a New Machine | Tracy Kidder', ' Software and Hardware Problems and Solutions | Simon Monk', ' Fundamentals of Superscalar Processors | John Shen', ' Structured Computer Organization | Andrew Tanenbaum', ' Computer Networking: A Top Down Approach | James Kurose', ' Computer Architecture: A Quantitative Approach | John Hennessy']
+
+
+
 __user = ""
 __pass = ""
 def validateLogin(username, password):
@@ -249,15 +255,10 @@ if response == "yes":
                       5. administrator(not available for users)""")
 
     while True:
-        # print("Check1111111")
 
         Input = input("Enter Choice:")
-        # print("Check222222")
-        # print(type(Input))
         while ( not Input.isnumeric()):
             Input = input("Please enter a number! : ")
-        # print("input is: ", int(Input))
-        # print("input is: ", Input)
 
         if int(Input) == 1:
             # print("Check33333")
@@ -424,10 +425,16 @@ if response == "yes":
                         prRed("not available books: ")
                         prRed(Diff(final_list, all_books_in_library))
 
+
+
+
+
+
+
+
                 else:
                     prRed("you are not admin and this item not available for you, please login with admin account :\ ")
                     break
-
 
         elif int(Input) == 4:
             print("Connection terminated. ")
