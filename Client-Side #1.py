@@ -137,12 +137,10 @@ class Student:
     def get_value(self):
         return self.name,self.password
 
+
+
+
 all_books_in_library = ['none', ' The Soul of a New Machine | Tracy Kidder', ' Software and Hardware Problems and Solutions | Simon Monk', ' Fundamentals of Superscalar Processors | John Shen', ' Structured Computer Organization | Andrew Tanenbaum', ' Computer Networking: A Top Down Approach | James Kurose', ' Computer Architecture: A Quantitative Approach | John Hennessy']
-
-
-
-
-
 
 
 
@@ -161,7 +159,7 @@ def validateLogin(username, password):
     printProgressBar(0, l, prefix='Progress:', suffix='Complete', length=30)
     for i, item in enumerate(items):
         # Do stuff...
-        time.sleep(0.01)
+        time.sleep(0.001999)
         # Update Progress Bar
         printProgressBar(i + 1, l, prefix='Progress:', suffix='Complete', length=30)
     # time.sleep(1)
@@ -299,13 +297,13 @@ if response == "yes":
             prYellow("     =================================================== ")
 
         elif int(Input) == 3:
-            print("1")
+            # print("1")
             clientsocket.send(str.encode(Input))
-            print("1")
+            # print("1")
             response = clientsocket.recv(1024)
-            print("1")
+            # print("1")
             response = response.decode("UTF-8")
-            print("response is: ", response)
+            # print("response is: ", response)
             if "@" in response:
                 responses = response.split('@')
                 index = 1
@@ -343,7 +341,7 @@ if response == "yes":
 
             response = clientsocket.recv(1024)
             response = response.decode("UTF-8")
-            print("response is: ", response)
+            # print("response is: ", response)
             if (response != "possible"):
                 print("server is not ready to execute code")
 
@@ -386,14 +384,14 @@ if response == "yes":
                         # pm
                         response1 = clientsocket.recv(2048)
                         response1 = response1.decode("UTF-8")
-                        print("response is: ", response1)
+                        # print("response is: ", response1)
 
                         clientsocket.sendall(str.encode("done"))
 
                         # pm attach
                         response2 = clientsocket.recv(2048)
                         response2 = response2.decode("UTF-8")
-                        print("attach is: ", response2)
+                        # print("attach is: ", response2)
 
                         # print("cheeeeck")
 
@@ -406,24 +404,18 @@ if response == "yes":
 
                         pms = response1.split("@")
                         for i in range(1,len(pms)  ):
-                            # print("cheeeeck3")
                             temp = pms[i].split("$")
-                            # print("temp is: ", temp)
 
                             temp_name = temp[0]
                             temp_pass = temp[1]
                             student = Student(temp_name,temp_pass)
                             final_memebers.append(student)
-                        # print("cheeeeck4")
                         final_memebers.pop(0)
                         final_memebers.pop(0)
-                        # for i in range(0, len(final_memebers)):
-                        #     print(i,"index is: ", final_memebers[i].get_value())
-                        # print("cheeeeck5")
+
                         for i in range(0, len(final_memebers)):
                             print(i,"index is: ", final_memebers[i].get_value())
                         print(final_memebers)
-                        # print("cheeeeck")
 
                         final_list = ["none"]
                         currentbooks = response2.split("@")
@@ -460,4 +452,5 @@ if response == "yes":
 
 else:
     prRed("         Authentication was unsuccessful :(")
+
 

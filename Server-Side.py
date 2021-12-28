@@ -276,24 +276,17 @@ def client_thread(connection):
         print("Current user info is: " , security_array[login_check].get_value())
         connection.sendall(str.encode("yes"))
         while True:
-            # time.sleep(20)
-            # print("Check222222")
-            # print("Array value is: ", r_array[0])
+
             data = connection.recv(2048)
-            # print("Check33333")
-            # print("recievd method:  ", data.decode("UTF-8"))
+
             data = data.decode("UTF-8")
             choice = int(data)
-            # print("Check4444")
             print("choose is :" , choice)
-
 
 
             if choice == 1:
                 data = library.displayAvailablebooks()
                 connection.sendall(str.encode(data))
-
-
 
             elif choice == 2:
                 connection.sendall(str.encode("send info"))
@@ -310,8 +303,6 @@ def client_thread(connection):
                 print("after -----> current user array is : ", security_array[login_check].get_array())
 
                 connection.sendall(str.encode(data))
-
-
 
             elif choice == 3:
                 # length = len(student.get_array())
@@ -333,7 +324,6 @@ def client_thread(connection):
                     message = library.Student_and_library_array_handler(index , security_array[login_check])
                     print(message)
                     connection.sendall(str.encode(message))
-
 
             elif choice == 5:
                 connection.sendall(str.encode("possible"))
@@ -383,7 +373,6 @@ def client_thread(connection):
                     else:
                         print(admin_command3)
 
-
             elif choice == 4:
                 # global ThreadCount
                 # if ThreadCount > 0:
@@ -393,14 +382,11 @@ def client_thread(connection):
             #     exec(data)
             #
             # print("out:", s.getvalue())
-
             if not data:
                 # to stop free client's True loop
                 break
-
             # connection.sendall(str.encode(s.getvalue()))
             # connection.sendall(str.encode(data))
-
         # connection.close()
     else:
         print("authentication was unsuccessful :(")
@@ -452,4 +438,4 @@ while True:
     print("Number of accepted clients: " + str(ThreadCount))
     prRed("\n==============================================================")
 socketserver.close()
-# print("remote admin needs the number of current online users:",ThreadCount)
+# print("example: remote admin needs the number of current online users(only display it on server side):",ThreadCount)
