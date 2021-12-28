@@ -11,6 +11,7 @@
 				 
 	configuration:
 	
-				If you are running the client and server on the single machine, just make sure the 10000 port of your system is free :]
+				If you are running the client and server on the single machine, 
+				just make sure the 10000 port of your system is free :]
 				else you need to define the client&server IP addresses.
 				
