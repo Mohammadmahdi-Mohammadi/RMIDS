@@ -75,7 +75,7 @@ def stdoutIO(stdout=None):
     sys.stdout = old
     #
     # with stdoutIO() as s:
-    #     exec(data)
+    #     exec(data)    
     #
     # print("out:", s.getvalue())
 
